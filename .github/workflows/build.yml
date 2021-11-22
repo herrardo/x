@@ -6,7 +6,7 @@ jobs:
     container: cypress/browsers:node14.17.0-chrome91-ff89
     steps:
       - uses: actions/checkout@v2
-      - name: Cache dependencies
+      - name: Cache dependencies 2
         id: cache
         uses: actions/cache@v2
         with:
