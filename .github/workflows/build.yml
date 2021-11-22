@@ -6,7 +6,14 @@ jobs:
     container: cypress/browsers:node14.17.0-chrome91-ff89
     steps:
       - uses: actions/checkout@v2
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
       - name: Install lerna and all packages
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Run linter in all packages
         run: npm run lint
