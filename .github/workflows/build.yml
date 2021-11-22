@@ -6,14 +6,16 @@ jobs:
     container: cypress/browsers:node14.17.0-chrome91-ff89
     steps:
       - uses: actions/checkout@v2
-      - name: Cache dependencies 2
-        id: cache
+      - name: Cache Lerna dependencies
         uses: actions/cache@v2
         with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-lerna-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-lerna-
       - name: Install lerna and all packages
-        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Run linter in all packages
         run: npm run lint
