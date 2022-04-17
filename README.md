@@ -5,7 +5,7 @@
 [![Check branch is releasable](https://github.com/empathyco/x/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/empathyco/x/actions/workflows/build.yml)
 [![Created by](https://img.shields.io/badge/Created%20by-Empathy.co-green)](https://www.empathy.co)
 
-![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=empathyco/x&show_icons=true)
+![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=empathyco&show_icons=true)
 
 <img src=https://komarev.com/ghpvc/?username=herrardo/>
 
