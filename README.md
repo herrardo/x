@@ -5,6 +5,12 @@
 [![Check branch is releasable](https://github.com/empathyco/x/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/empathyco/x/actions/workflows/build.yml)
 [![Created by](https://img.shields.io/badge/Created%20by-Empathy.co-green)](https://www.empathy.co)
 
+![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=herrardo&show_icons=true)
+
+<img src=https://komarev.com/ghpvc/?username=herrardo/>
+
+
+
 <a href = "https://github.com/herrardo/x/graphs/contributors">
 <img src = "https://contrib.rocks/image?repo=herrardo/x"/>
 </a>
