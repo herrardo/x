@@ -6,7 +6,7 @@
 [![Created by](https://img.shields.io/badge/Created%20by-Empathy.co-green)](https://www.empathy.co)
 
 <a href = "https://github.com/herrardo/x/graphs/contributors">
-<img src = "https://contrib.rocks/image?repo = herrardo/x"/>
+<img src = "https://contrib.rocks/image?repo=herrardo/x"/>
 </a>
 
 Whether you use Empathy Search API endpoints, Elasticsearch, Solr or other search APIs, bring your
