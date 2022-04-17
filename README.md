@@ -5,6 +5,10 @@
 [![Check branch is releasable](https://github.com/empathyco/x/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/empathyco/x/actions/workflows/build.yml)
 [![Created by](https://img.shields.io/badge/Created%20by-Empathy.co-green)](https://www.empathy.co)
 
+<a href = "https://github.com/herrardo/x/graphs/contributors">
+<img src = "https://contrib.rocks/image?repo = herrardo/x"/>
+</a>
+
 Whether you use Empathy Search API endpoints, Elasticsearch, Solr or other search APIs, bring your
 commerce search and discovery experience to life with Interface X, an irresistible, expressive, and
 joyful search UI. Interface X is used within some of the most beautiful commerce search experiences
