@@ -3,6 +3,684 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-alpha.203](https://github.com/empathyco/x/compare/@empathyco/x-components@3.0.0-alpha.30...@empathyco/x-components@3.0.0-alpha.203) (2022-10-25)
+
+### ⚠ BREAKING CHANGES
+
+- **tagging:** `tagging` property of `Taggable` and `queryTagging` property of `SearchResponse` are
+  optional.
+- **result:** `Result` model properties are optional, except `id`, `modelName` and `tagging`.
+- **facets:** Removed the `setFilter`mutation from `facets` X-Module. Use `mutateFilter` instead.
+- **facets:** Modified the `HierarchicalFilter.children` Model type. Now it is an
+  `Array<HierarchicalFilter>` instead of an array of ids.
+- `--x-number-aspect-ratio-picture` is now inverted. Previously a value of 2 meant that it was twice
+  taller than wider. Now it means twice wider than taller.
+- **facets:** Renamed method `registerFilterModifier` in `FilterEntityFactory` to
+  `registerModifierByFacetId`.
+- **facets:** Changed `modifiers` parameter of `registerFilterModifier` in `FilterEntityFactory`
+  from a single array in favour of rest parameters.
+- Request types moved to `x-types` package. Change the imports from `x-adapter` to `x-type`.
+- Removed `TaggingInfo` type. Use `TaggingRequest` from `@empathyco/x-types` instead.
+- Remove `selected` and `previous` logic from related tags.
+- Remove `EmpathyRequestRelatedTagsQueryMapper`.
+- **components:** Removed `CollapseFromTop` Animation. Use `animateScale()` instead.
+- **components:** Removed `TranslateFromLeft` and `TranslateFromRight` components. Use
+  `animateTranslate('left')` and `animateTranslate('right')` instead.
+- **facets:** Remove `BaseFilter` component. Use `RenderlessFilter`instead.
+- **components:** `SlidingPanel` buttons do not have the round variant set by default.
+- **storage-service:** `StorageService` has been renamed to `BrowserStorageService`.
+
+### Features
+
+- **adapter:** disable cancel http client (#658)
+  ([3b5b86d](https://github.com/empathyco/x/commit/3b5b86d4725edefa084181a704df716a389eecbc)),
+  closes [EX-6875](https://searchbroker.atlassian.net/browse/EX-6875)
+- **adapter:** use the `x-adapter-platform` (#565)
+  ([55bccb4](https://github.com/empathyco/x/commit/55bccb4118bc0fd2468b736eb470942aaae2e4ae)),
+  closes [EX-5936](https://searchbroker.atlassian.net/browse/EX-5936)
+- add 'my_history' as feature location (#587)
+  ([7b0263e](https://github.com/empathyco/x/commit/7b0263e23c9afb2af61174ac53bdedd3eb4263ba)),
+  closes [EX-6527](https://searchbroker.atlassian.net/browse/EX-6527)
+- add `alt-text` accessibility
+  ([da5a10a](https://github.com/empathyco/x/commit/da5a10a236aae5fae96943fe0ad54849df15e7f5)),
+  closes [EX-5930](https://searchbroker.atlassian.net/browse/EX-5930)
+- add `queriesPreview` option to snippet config (#654)
+  ([7733c98](https://github.com/empathyco/x/commit/7733c9856b2859574ca0cace9c79b8b58545f46a)),
+  closes [EX-6849](https://searchbroker.atlassian.net/browse/EX-6849)
+- Add `setSnippetConfig` function to the `X` API
+  ([8c53cc7](https://github.com/empathyco/x/commit/8c53cc74cdd95e1a8ef3aa8167206cd81685d1e7)),
+  closes [EX-5384](https://searchbroker.atlassian.net/browse/EX-5384)
+- add `uiLang` parameter (#714)
+  ([f4108d4](https://github.com/empathyco/x/commit/f4108d4a76582dac7b1f8cd240e91f226e7b1ad5)),
+  closes [EX-6855](https://searchbroker.atlassian.net/browse/EX-6855)
+- add `vue devtools` plugin to ease `XEvents` and `wiring` visualization (#215)
+  ([bd148ec](https://github.com/empathyco/x/commit/bd148ecb9682f8d4161d278c03f110f8f050d323)),
+  closes [EX-7032](https://searchbroker.atlassian.net/browse/EX-7032)
+- Add directional origins for translate animations (#773)
+  ([9f4a0b0](https://github.com/empathyco/x/commit/9f4a0b03c675291672081388e42fcec725ab594d))
+- Add search input hover events (#772)
+  ([393cc87](https://github.com/empathyco/x/commit/393cc877457f618396a5b71a7a826e6e8d139c3a)),
+  closes [EX-7177](https://searchbroker.atlassian.net/browse/EX-7177)
+- add settings icon (#589)
+  ([7f93849](https://github.com/empathyco/x/commit/7f9384915718805809ff733f2be60ae6ebb01910)),
+  closes [EX-6519](https://searchbroker.atlassian.net/browse/EX-6519)
+- **components:** add `BaseSwitch` component (#586)
+  ([31cde2d](https://github.com/empathyco/x/commit/31cde2dfb79dcc549c8662b558ef5b80529f2d01)),
+  closes [EX-6004](https://searchbroker.atlassian.net/browse/EX-6004)
+- **components:** add `buttonClass` prop in `SlidingPanel`
+  ([fa554a2](https://github.com/empathyco/x/commit/fa554a2231ec9a00b5aea566970c2b7b0d34845f)),
+  closes [EX-5233](https://searchbroker.atlassian.net/browse/EX-5233)
+- **components:** Add `GlobalXBus `component
+  ([cc8e28b](https://github.com/empathyco/x/commit/cc8e28b5b5d7f1735c490c0b576d620f4f1dd103)),
+  closes [EX-3535](https://searchbroker.atlassian.net/browse/EX-3535)
+- **components:** add `MainModal`, `OpenMainModal` and `CloseMainModal` (#609)
+  ([526ab58](https://github.com/empathyco/x/commit/526ab5813f58258180b5640cab6bf0f2179fa40a)),
+  closes [EX-6546](https://searchbroker.atlassian.net/browse/EX-6546)
+- **components:** Add `payload` and `metadata` to the `SnippetCallbackExecuted` event payload
+  ([a18b8fa](https://github.com/empathyco/x/commit/a18b8fafcc7607fef82d3c9fb1211669f3bbc8a3)),
+  closes [EX-5324](https://searchbroker.atlassian.net/browse/EX-5324)
+- **components:** add `SnippetCallbacks` component
+  ([0b89a9f](https://github.com/empathyco/x/commit/0b89a9ff0de60194567d47e768bf0f0fb654b998)),
+  closes [EX-5002](https://searchbroker.atlassian.net/browse/EX-5002)
+- **components:** add disable animation mixin (#703)
+  ([ea344f9](https://github.com/empathyco/x/commit/ea344f9d5e7b36da6aabdd4fe5d2a1ad05dbcfc8)),
+  closes [EX-6838](https://searchbroker.atlassian.net/browse/EX-6838)
+- **components:** add grid-4-col and update light-bulb icons (#579)
+  ([5312952](https://github.com/empathyco/x/commit/5312952c69f67525a35b77008128264eddaae206)),
+  closes [EX-6506](https://searchbroker.atlassian.net/browse/EX-6506)
+- **components:** Add icons for Arrows UP DOWN LEFT and RIGHT. (#295)
+  ([693b26f](https://github.com/empathyco/x/commit/693b26f8e2d250f97bcf0cce472299b2edcc4823)),
+  closes [EX-5245](https://searchbroker.atlassian.net/browse/EX-5245)
+- **components:** Add new origins to the `animateClipPath` animation factory. (#777)
+  ([d016057](https://github.com/empathyco/x/commit/d016057ea0c92901dc88df755351b4acee32f472)),
+  closes [EX-7195](https://searchbroker.atlassian.net/browse/EX-7195)
+- **components:** add new slot `extra-aside` to `SingleColumnLayout` and
+  `FixedHeaderAndAsidesLayout` (#591)
+  ([91d406e](https://github.com/empathyco/x/commit/91d406ed7267d420009a5f3ee8c5cc092f74546a)),
+  closes [EX-6614](https://searchbroker.atlassian.net/browse/EX-6614)
+- **components:** add radio button icons (#574)
+  ([4432d5f](https://github.com/empathyco/x/commit/4432d5f927e5c5cac6cb7481923e32ceb6cb0499)),
+  closes [EX-6439](https://searchbroker.atlassian.net/browse/EX-6439)
+- **components:** add Result Rating component
+  ([db5cbb5](https://github.com/empathyco/x/commit/db5cbb5779e0e503ec934df4cda3dd241c49fc8e)),
+  closes [EX-5243](https://searchbroker.atlassian.net/browse/EX-5243)
+- **components:** Allow `BaseResultAddToCart` to use external listeners.
+  ([a596c07](https://github.com/empathyco/x/commit/a596c07c1ead0e8d3fcf169afddaf15ad6d92e47)),
+  closes [EX-5323](https://searchbroker.atlassian.net/browse/EX-5323)
+- **components:** created abstract factory for animations
+  ([a6120c1](https://github.com/empathyco/x/commit/a6120c135f93e5993f8d41b2b823085a2bf3d291)),
+  closes [EX-5355](https://searchbroker.atlassian.net/browse/EX-5355)
+- **components:** fix 'BaseRating' component styles (#264)
+  ([053447f](https://github.com/empathyco/x/commit/053447fdb2884f04f6099b6b78876c006568a644)),
+  closes [EX-5096](https://searchbroker.atlassian.net/browse/EX-5096)
+- **components:** make `BaseIdModalClose` rendering configurable (#627)
+  ([4bf97af](https://github.com/empathyco/x/commit/4bf97af19ac5f2fd1b08b6e4097dec45eef00679)),
+  closes [EX-6726](https://searchbroker.atlassian.net/browse/EX-6726)
+- **components:** make `BaseIdModalOpen` rendering configurable (#637)
+  ([77cb564](https://github.com/empathyco/x/commit/77cb5646b1e43c8b7aa428db4102dc6aca8affdf)),
+  closes [EX-6751](https://searchbroker.atlassian.net/browse/EX-6751)
+- **components:** merge a variant with the result (#667)
+  ([553d0e5](https://github.com/empathyco/x/commit/553d0e5de8ef5468eb673246f39fbeb826301fa1)),
+  closes [EX-6762](https://searchbroker.atlassian.net/browse/EX-6762)
+- **components:** variants auto selection (#679)
+  ([c1c8664](https://github.com/empathyco/x/commit/c1c866481ae8866fec4fd9e2dd5389fcba00e62b)),
+  closes [EX-6878](https://searchbroker.atlassian.net/browse/EX-6878)
+- **design-system:** add `curated` modifier to the `suggestion`
+  ([dd229fd](https://github.com/empathyco/x/commit/dd229fd3d64840ed3041bec618a1a23e3726430d)),
+  closes [EX-5290](https://searchbroker.atlassian.net/browse/EX-5290)
+- **design-system:** add `tailwindcss` to `x-components` and configure it to use `x-tailwindcss`
+  (#655)
+  ([4109a8a](https://github.com/empathyco/x/commit/4109a8ad9d29378078603d97e31c073ceb2671ae)),
+  closes [EX-6793](https://searchbroker.atlassian.net/browse/EX-6793)
+- **design-system:** Add bottom variant to `x-shadow` utility in the Design System
+  ([a23552f](https://github.com/empathyco/x/commit/a23552f29d1ec1b7939c770862d91f9e2f3a4890)),
+  closes [EX-5184](https://searchbroker.atlassian.net/browse/EX-5184)
+- **design-system:** add curated tags (#311)
+  ([9f40c2b](https://github.com/empathyco/x/commit/9f40c2b17eb08353efc964dba075470877eead46)),
+  closes [EX-5089](https://searchbroker.atlassian.net/browse/EX-5089)
+- **design-system:** add identifier result in suggestion component
+  ([d4ce3c2](https://github.com/empathyco/x/commit/d4ce3c2eb1188e38e55e466f65c9da165bf9bfe7)),
+  closes [EX-5065](https://searchbroker.atlassian.net/browse/EX-5065)
+- **design-system:** Add more utility classes.
+  ([592e076](https://github.com/empathyco/x/commit/592e0761d201d80fdf62ba260ac4ef0847fb7f17)),
+  closes [EX-5241](https://searchbroker.atlassian.net/browse/EX-5241)
+- **design-system:** allow suggestions to be tags
+  ([24c94bb](https://github.com/empathyco/x/commit/24c94bb604f87a2135a36be5a298f053eba80738)),
+  closes [EX-4917](https://searchbroker.atlassian.net/browse/EX-4917)
+- **design-system:** change curated tag toke values to reuse default ones.
+  ([2fd261a](https://github.com/empathyco/x/commit/2fd261ae54ec3de8eabdbcd5611bf5e1416d37f8)),
+  closes [EX-5354](https://searchbroker.atlassian.net/browse/EX-5354)
+- **design-system:** generate old design system tokens with tailwind values (#675)
+  ([7aa42e4](https://github.com/empathyco/x/commit/7aa42e4e26ec34fea942bbf7f0c7f10a97a94237)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+- **desing-system:** Add `Grid2RowsIcon` component
+  ([cbd014f](https://github.com/empathyco/x/commit/cbd014fb1a07c2aa738c3ef828c9caf5ec9ded39)),
+  closes [EX-5238](https://searchbroker.atlassian.net/browse/EX-5238)
+- **desing-system:** Add new color tokens. (#275)
+  ([e93fcc4](https://github.com/empathyco/x/commit/e93fcc4cea0e975441695f14a66b0863cb5896af)),
+  closes [EX-5171](https://searchbroker.atlassian.net/browse/EX-5171)
+- disable `@typescript-eslint/no-extra-parens` rule (#715)
+  ([3718017](https://github.com/empathyco/x/commit/3718017c5528156f931bc8b1f2d208cdb50781ed)),
+  closes [EX-6996](https://searchbroker.atlassian.net/browse/EX-6996)
+- **eslint:** add `vuejs-accessibility` plugin (#427)
+  ([6789771](https://github.com/empathyco/x/commit/6789771ab88a909552da74095694a4c2a191a51d)),
+  closes [EX-5845](https://searchbroker.atlassian.net/browse/EX-5845)
+- **EX-3539:** track PDP add to cart (#306)
+  ([dcad4f6](https://github.com/empathyco/x/commit/dcad4f69ce6b267960f882b3831459e372086272)),
+  closes [EX-3539](https://searchbroker.atlassian.net/browse/EX-3539)
+  [EX-3538](https://searchbroker.atlassian.net/browse/EX-3538)
+- **extra-params:** add option to add more extra params using a prop in `SnippetConfigExtraParams`
+  component
+  ([7f9f8b2](https://github.com/empathyco/x/commit/7f9f8b2a7d2a78ed5a101f6e005fffa4f20d3594)),
+  closes [EX-5205](https://searchbroker.atlassian.net/browse/EX-5205)
+- **extra-params:** makes `excludedExtraParams` configurable
+  ([ca2bed1](https://github.com/empathyco/x/commit/ca2bed17c7ef8ed893a65e7d1a055901491ea8fa))
+- extract SessionService to x-utils package
+  ([5268808](https://github.com/empathyco/x/commit/52688087e577dfd7ce9b0669b21ada75ae67053c))
+- **facets:** add `PreselectedFilters` component
+  ([5496d78](https://github.com/empathyco/x/commit/5496d7868c77d8b9211fd532bf964770da1d6a3c)),
+  closes [EX-6023](https://searchbroker.atlassian.net/browse/EX-6023)
+- **facets:** add `registerModifierByFilterModelName`
+  ([36956a1](https://github.com/empathyco/x/commit/36956a13b33cc5430381d33ac53cd33b706136da)),
+  closes [EX-6106](https://searchbroker.atlassian.net/browse/EX-6106)
+- **facets:** add facets mixin to share logic between components
+  ([c8a9046](https://github.com/empathyco/x/commit/c8a904612213cd12040dd6fa1348f6c9a7726eda)),
+  closes [EX-2899](https://searchbroker.atlassian.net/browse/EX-2899)
+- **facets:** Add slot by Facet ModelName. (#572)
+  ([899515a](https://github.com/empathyco/x/commit/899515a1424bfab9a8d937a1feb9507917173807)),
+  closes [EX-6433](https://searchbroker.atlassian.net/browse/EX-6433)
+- **facets:** change `NumberRangeFilter` component to use `RenderlessFilter` instead of `BaseFilter`
+  ([f0edfac](https://github.com/empathyco/x/commit/f0edfac14a184ed7fefd27e1c1e700848ada4471)),
+  closes [EX-3953](https://searchbroker.atlassian.net/browse/EX-3953)
+- **facets:** expose `clickEvents` as a `prop` in filters components using a `RenderlessFilter`
+  ([013d83d](https://github.com/empathyco/x/commit/013d83d93ac734a1365bbf98a19ae15dc2f1a64b)),
+  closes [EX-5986](https://searchbroker.atlassian.net/browse/EX-5986)
+- **facets:** Move filters flattening from `x-adapter-platform` to `x-components`. (#626)
+  ([2bebaeb](https://github.com/empathyco/x/commit/2bebaeb2863fe794f1b3bea924904651b9302ef6)),
+  closes [EX-6484](https://searchbroker.atlassian.net/browse/EX-6484)
+- **facets:** remove filters on new query (#717)
+  ([e452ece](https://github.com/empathyco/x/commit/e452ecebb194b2fa248402405e26ed1044c1d849)),
+  closes [EX-6196](https://searchbroker.atlassian.net/browse/EX-6196)
+- fix form label warnings
+  ([2437b09](https://github.com/empathyco/x/commit/2437b096ca1ddb9b97c3207e338b9fb587bc3ea7)),
+  closes [EX-6025](https://searchbroker.atlassian.net/browse/EX-6025)
+- fix rest of warnings for accessibility
+  ([553d5ba](https://github.com/empathyco/x/commit/553d5bac9256871e69de2c3b87dfc99a993d0f1f)),
+  closes [EX-6149](https://searchbroker.atlassian.net/browse/EX-6149)
+- hidde overflow-y in the sliding panel (#768)
+  ([3458e61](https://github.com/empathyco/x/commit/3458e618005e6a1bcd875127749a90b411b80f86)),
+  closes [EX-7015](https://searchbroker.atlassian.net/browse/EX-7015)
+- **history-queries:** add `HistoryQueriesSwitch` component (#593)
+  ([8c87cc3](https://github.com/empathyco/x/commit/8c87cc3a35336720d3da79ab7347e52caa4cd922)),
+  closes [EX-6515](https://searchbroker.atlassian.net/browse/EX-6515)
+- **history-queries:** add `my-history` component
+  ([a7de7f2](https://github.com/empathyco/x/commit/a7de7f297251bf4290787e362f46b2ab3ec6a428)),
+  closes [EX-3582](https://searchbroker.atlassian.net/browse/EX-3582)
+- **history-queries:** add `MyHistory` component
+  ([9929212](https://github.com/empathyco/x/commit/992921275edcca7a6c14ab6dfeaa2dbacae6a5e8)),
+  closes [EX-5703](https://searchbroker.atlassian.net/browse/EX-5703)
+- **history-queries:** add `UserClickedDismissDisableHistoryQueries` event
+  ([ea0bddc](https://github.com/empathyco/x/commit/ea0bddce87ec1e87b753bb39863cbee903fb9eed)),
+  closes [EX-6682](https://searchbroker.atlassian.net/browse/EX-6682)
+- **history-queries:** add toggle to enable/disable the history queries
+  ([655b55a](https://github.com/empathyco/x/commit/655b55a3f10788073a842d18f7849634e5f94376)),
+  closes [EX-5600](https://searchbroker.atlassian.net/browse/EX-5600)
+- **history-queries:** bind `formatTime` to `suggestion-content` slot (#598)
+  ([589eef2](https://github.com/empathyco/x/commit/589eef287534e9916dcda7b0ad86626eb450decd)),
+  closes [EX-6611](https://searchbroker.atlassian.net/browse/EX-6611)
+- **history-queries:** disable `MyHistory` without confirmation when the `history queries` list is
+  empty (#615)
+  ([8b0b1d6](https://github.com/empathyco/x/commit/8b0b1d6e818557eba9482dcd149ed3882ca6c854)),
+  closes [EX-6696](https://searchbroker.atlassian.net/browse/EX-6696)
+- **identifier-results:** add extra params in the x-module
+  ([6afff42](https://github.com/empathyco/x/commit/6afff426081b645bb0e878c77915a4c319b847d2)),
+  closes [EX-5066](https://searchbroker.atlassian.net/browse/EX-5066)
+- **identifier-results:** add maxItemsToRender prop (#576)
+  ([c740b8b](https://github.com/empathyco/x/commit/c740b8b8c1a66d25eb8cc2aaa84303cb186ae8ea)),
+  closes [EX-6414](https://searchbroker.atlassian.net/browse/EX-6414)
+- Improve `tailwindcss` types (#730)
+  ([b7ab20c](https://github.com/empathyco/x/commit/b7ab20cfb0faa7f21fdf4aaaa4ae3e6d44bc6a79)),
+  closes [EX-7041](https://searchbroker.atlassian.net/browse/EX-7041)
+- Improve tailwindcss types. (#725)
+  ([14dec97](https://github.com/empathyco/x/commit/14dec974174cd18e63cb5f4e9a690a9989de44bc)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+- make `adapter` configurable in the `home` view (#750)
+  ([0fcc5cf](https://github.com/empathyco/x/commit/0fcc5cf38995a439b3011e1b7d94e7edaa7f9ce5)),
+  closes [EX-7073](https://searchbroker.atlassian.net/browse/EX-7073)
+- move `Request` types to `x-types` package
+  ([7cc85c1](https://github.com/empathyco/x/commit/7cc85c1d371b604b3188d8cc2076eab5fc9460e4)),
+  closes [EX-6066](https://searchbroker.atlassian.net/browse/EX-6066)
+- move `response` types to `@empathyco/x-types`
+  ([77fb812](https://github.com/empathyco/x/commit/77fb812b77fe0c84462a4b5b2eb7f0439e2d8061)),
+  closes [EX-6092](https://searchbroker.atlassian.net/browse/EX-6092)
+- Move `XAPI` from `window.X` to `window.InterfaceX` (#599)
+  ([4538778](https://github.com/empathyco/x/commit/45387783c947f859667f2786ba9013b83b952063)),
+  closes [EX-6645](https://searchbroker.atlassian.net/browse/EX-6645)
+- move related tags concatenation logic (#365)
+  ([4e71797](https://github.com/empathyco/x/commit/4e717970198f67018a9b66ed6e47f511ecef4c62)),
+  closes [EX-5410](https://searchbroker.atlassian.net/browse/EX-5410)
+- **next-queries:** add `concatWhenNoMoreItems` prop (#705)
+  ([ac73fb7](https://github.com/empathyco/x/commit/ac73fb7d2e66c3cb1aab0b64586d9e86495436de)),
+  closes [EX-6841](https://searchbroker.atlassian.net/browse/EX-6841)
+- **next-queries:** add `maxItemsToRender` prop to `NextQueryPreview` component (#646)
+  ([848427c](https://github.com/empathyco/x/commit/848427cb9dae85c72549ab026b3785194ec4adbd)),
+  closes [EX-6820](https://searchbroker.atlassian.net/browse/EX-6820)
+- **next-queries:** add `origin` to `next queries preview` (#746)
+  ([8928676](https://github.com/empathyco/x/commit/89286768a007d9b8888bfbc6db43c39b6d963380)),
+  closes [EX-6757](https://searchbroker.atlassian.net/browse/EX-6757)
+- **next-queries:** add isCurated property
+  ([8b7b313](https://github.com/empathyco/x/commit/8b7b3132c7fa8aff095a92c84abdc150be705976)),
+  closes [EX-5152](https://searchbroker.atlassian.net/browse/EX-5152)
+- **next-queries:** add next query preview component (#631)
+  ([1513ab1](https://github.com/empathyco/x/commit/1513ab1ef0cbcf42d72f483d99815eba76b5eaad)),
+  closes [EX-6646](https://searchbroker.atlassian.net/browse/EX-6646)
+- **next-queries:** add next query preview logic (#611)
+  ([fc611fa](https://github.com/empathyco/x/commit/fc611faa39e63e5f916cd19928e9ab0755f8dc7f)),
+  closes [EX-6119](https://searchbroker.atlassian.net/browse/EX-6119)
+- **plugin:** move alias creation from created hook to beforeCreated
+  ([57f98e6](https://github.com/empathyco/x/commit/57f98e6587c0c589c4b6581a5f2c1da1a45757d8)),
+  closes [EX-4331](https://searchbroker.atlassian.net/browse/EX-4331)
+- **queries-preview:** add query preview component (#699)
+  ([676cda4](https://github.com/empathyco/x/commit/676cda42a3cbd37ee00e3200a89854c6c1bec3ee)),
+  closes [EX-6845](https://searchbroker.atlassian.net/browse/EX-6845)
+- **queries-preview:** add wiring and actions (#677)
+  ([a92e350](https://github.com/empathyco/x/commit/a92e3509be65dfce17796efa6fae14a370bc875c)),
+  closes [EX-6844](https://searchbroker.atlassian.net/browse/EX-6844)
+- **queries-preview:** create `queriesPreview` module (#670)
+  ([317d961](https://github.com/empathyco/x/commit/317d961e94b0b7454cb4d858d401c4264c74cf0e)),
+  closes [EX-6638](https://searchbroker.atlassian.net/browse/EX-6638)
+- **query-preview:** Add `debounceTimeMs` to `QueryPreview` component. (#752)
+  ([ddca375](https://github.com/empathyco/x/commit/ddca375201056d374515b7426df1fac3a1ecf6c1)),
+  closes [EX-7049](https://searchbroker.atlassian.net/browse/EX-7049)
+- **query-preview:** add `origin` to `QueryPreview` component (#737)
+  ([9c235bc](https://github.com/empathyco/x/commit/9c235bc9457cc959fa2a386b8dce114ff3bf6df7)),
+  closes [EX-7077](https://searchbroker.atlassian.net/browse/EX-7077)
+- **related-tags:** add `isCurated` property to related tags
+  ([e063f45](https://github.com/empathyco/x/commit/e063f4560573bcb1bf32fbe49753f2fe6b235cc7)),
+  closes [EX-4940](https://searchbroker.atlassian.net/browse/EX-4940)
+- remove old adapter package and use the new one (#568)
+  ([1632a59](https://github.com/empathyco/x/commit/1632a594b6905e6403c82b2189300eefd45b3691)),
+  closes [EX-6286](https://searchbroker.atlassian.net/browse/EX-6286)
+- Remove vue filters (#635)
+  ([5026e84](https://github.com/empathyco/x/commit/5026e84b7dec3a283af8fdd2f68f84b49d332911)),
+  closes [EX-6508](https://searchbroker.atlassian.net/browse/EX-6508)
+- **result:** add `variants` support (#644)
+  ([d5db09e](https://github.com/empathyco/x/commit/d5db09e9be92d0df65329680ee286959030ccecc)),
+  closes [EX-6760](https://searchbroker.atlassian.net/browse/EX-6760)
+- **scroll:** add scroll data state to the alias API
+  ([7f5642c](https://github.com/empathyco/x/commit/7f5642cf5e60fe96a22c8fe9897c9ba73cbede55)),
+  closes [EX-5249](https://searchbroker.atlassian.net/browse/EX-5249)
+- **scroll:** remove animations on pending element to scroll
+  ([7a33653](https://github.com/empathyco/x/commit/7a336531c4fedb2c38133a5464f9b7e9736cef68)),
+  closes [EX-5025](https://searchbroker.atlassian.net/browse/EX-5025)
+- **search-box:** add `SearchInputPlaceholder` component (#771)
+  ([a2e73e3](https://github.com/empathyco/x/commit/a2e73e3895c5454898fbc7ddc6d2202e03448fff)),
+  closes [EX-7178](https://searchbroker.atlassian.net/browse/EX-7178)
+- **search-box:** focus search input after clicking clear search button
+  ([d28994c](https://github.com/empathyco/x/commit/d28994c1995834a1adb19798060051089200d7f7)),
+  closes [EX-2242](https://searchbroker.atlassian.net/browse/EX-2242)
+- **search-input:** prevent `<` or `>` input (#433)
+  ([afc865f](https://github.com/empathyco/x/commit/afc865f2e13d775e5ee4a602536dfd2ee8b474b8)),
+  closes [EX-7035](https://searchbroker.atlassian.net/browse/EX-7035)
+- **search:** add `updateResult` mutation (#706)
+  ([809e346](https://github.com/empathyco/x/commit/809e34694e5a54bd72e92272aa69a9123bef94c4)),
+  closes [EX-6894](https://searchbroker.atlassian.net/browse/EX-6894)
+- **search:** change `saveOriginWire` wire from `SelectedRelatedTagsChanged` to
+  `UserPickedARelatedTag` (#254)
+  ([86072b0](https://github.com/empathyco/x/commit/86072b0805a3dc61b75c0a5760cf2c70e125be34)),
+  closes [EX-5078](https://searchbroker.atlassian.net/browse/EX-5078)
+- **search:** extract `fetchAndSaveResponse` `onSuccess` callback to its own `saveSearchResponse`
+  action (#461)
+  ([d24560f](https://github.com/empathyco/x/commit/d24560f3a091e84bc1e43cfae5c380c0262cc3b0)),
+  closes [EX-5982](https://searchbroker.atlassian.net/browse/EX-5982)
+- **search:** make `banners`, `promoteds` , `redirections`, `spellcheck` and `partialResults`
+  optionals in `SearchResponse`
+  ([2d205c3](https://github.com/empathyco/x/commit/2d205c3141f69e05624dfb91987ebf14aee5fc34)),
+  closes [EX-5976](https://searchbroker.atlassian.net/browse/EX-5976)
+- **storage-service:** Rename `StorageService` to `BrowserStorageService`
+  ([6bf38fb](https://github.com/empathyco/x/commit/6bf38fb7d14323c84c949e21eaa9c692fb0014d7)),
+  closes [EX-5073](https://searchbroker.atlassian.net/browse/EX-5073)
+- **tagging:** `track` query
+  ([594c656](https://github.com/empathyco/x/commit/594c65649cbf08f586dc9912b367ea39d9da2fa6)),
+  closes [EX-4989](https://searchbroker.atlassian.net/browse/EX-4989)
+- **tagging:** add feature hardcoded values
+  ([ee6db3a](https://github.com/empathyco/x/commit/ee6db3a360228528a109fedc732bd552ad5d5a61)),
+  closes [EX-5003](https://searchbroker.atlassian.net/browse/EX-5003)
+- **tagging:** add new `SearchTaggingReceived` event for tracking the query
+  ([d58b697](https://github.com/empathyco/x/commit/d58b69730915ccd6fb2b0656ff7280450275b5be)),
+  closes [EX-5170](https://searchbroker.atlassian.net/browse/EX-5170)
+- **tagging:** Include 'location' parameter to track result events. (#273)
+  ([69bab4b](https://github.com/empathyco/x/commit/69bab4b81f85725f3fc0a9bdc3177db09dd46a40)),
+  closes [EX-5163](https://searchbroker.atlassian.net/browse/EX-5163)
+  [EX-5163](https://searchbroker.atlassian.net/browse/EX-5163)
+- **tagging:** make `tagging` and `queryTagging` optional (#797)
+  ([0e49156](https://github.com/empathyco/x/commit/0e49156308d4e77d667a2191697101674cdbf213)),
+  closes [EX-7231](https://searchbroker.atlassian.net/browse/EX-7231)
+- **tagging:** move `origin` from `request.getter` to `fetchAndSave.action`
+  ([b0bb40d](https://github.com/empathyco/x/commit/b0bb40de5e2ae7f65e2e2df032a1da9a51f0cb4d)),
+  closes [EX-5079](https://searchbroker.atlassian.net/browse/EX-5079)
+- **tagging:** track pending query
+  ([e6c8fd4](https://github.com/empathyco/x/commit/e6c8fd401b28b2e931ebf78697f218f53134cc5a)),
+  closes [EX-4963](https://searchbroker.atlassian.net/browse/EX-4963)
+- **tagging:** track result click events
+  ([81f009b](https://github.com/empathyco/x/commit/81f009b0a6264c44436082e457bcb4a12daf5d19)),
+  closes [EX-3527](https://searchbroker.atlassian.net/browse/EX-3527)
+- **tagging:** track the 'UserClickedResultAddToCart'event in tagging
+  ([873d345](https://github.com/empathyco/x/commit/873d345d67199a64fe9f10c70944b4f74f290405)),
+  closes [EX-3529](https://searchbroker.atlassian.net/browse/EX-3529)
+- **test:** refactor base tests to cypress component testing
+  ([dc7a924](https://github.com/empathyco/x/commit/dc7a924b612411470742d222bcc6531fa656ce13)),
+  closes [EX-4928](https://searchbroker.atlassian.net/browse/EX-4928)
+- update polyfills plugin to work with chunks
+  ([54c1842](https://github.com/empathyco/x/commit/54c18420011e5e452bd8b48d640cbd067d0ce921)),
+  closes [EX-5278](https://searchbroker.atlassian.net/browse/EX-5278)
+- update typescript
+  ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)),
+  closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+- **url:** set `origin` when navigating
+  ([02aa766](https://github.com/empathyco/x/commit/02aa7661a15c3718f4809d094a01b0f684a1f55d)),
+  closes [EX-3541](https://searchbroker.atlassian.net/browse/EX-3541)
+- **utils:** log request errors by default (#458)
+  ([872c0b9](https://github.com/empathyco/x/commit/872c0b9e64112388c641434c2e0cb81ea92d9c20)),
+  closes [EX-5981](https://searchbroker.atlassian.net/browse/EX-5981)
+- **utils:** now `origin` only requires the `feature`
+  ([087d646](https://github.com/empathyco/x/commit/087d646a2b97f945e9c4f81112925a6783d66f41)),
+  closes [EX-5077](https://searchbroker.atlassian.net/browse/EX-5077)
+- **wiring:** add force and cancel support to debounce and throttle wire operators. Update rxjs to
+  v7. ([1fe2f29](https://github.com/empathyco/x/commit/1fe2f298589b1aa44798f3911379fe11905a43a9)),
+  closes [EX-5123](https://searchbroker.atlassian.net/browse/EX-5123)
+- **x-plugin:** add full `history queries` list to `alias API`
+  ([e0e0430](https://github.com/empathyco/x/commit/e0e04301b6158dfc379d495e92c04ec5ef35c4ab)),
+  closes [EX-6610](https://searchbroker.atlassian.net/browse/EX-6610)
+- **x-plugin:** add results to `Alias API` (#545)
+  ([9993ab6](https://github.com/empathyco/x/commit/9993ab6c31f0b532a9cc12eea2f3fb18dd6fd856)),
+  closes [EX-6324](https://searchbroker.atlassian.net/browse/EX-6324)
+- **x-plugin:** Add selected sort (#274)
+  ([b4c0d14](https://github.com/empathyco/x/commit/b4c0d140ca5eba8de189068fef5dd2a6249c1207)),
+  closes [EX-5165](https://searchbroker.atlassian.net/browse/EX-5165)
+
+### Bug Fixes
+
+- `pointer-events` affecting scrolling in sliding panel in `SingleColumnLayout` aside (#614)
+  ([1463bc1](https://github.com/empathyco/x/commit/1463bc1d5dd1fbd9c279077d7240329b853f82be)),
+  closes [EX-6595](https://searchbroker.atlassian.net/browse/EX-6595)
+- **base-currency:** format preference goes prop to be injected by default
+  ([29d5e8d](https://github.com/empathyco/x/commit/29d5e8d576019504ef642af6119c764292f44c51)),
+  closes [EX-5649](https://searchbroker.atlassian.net/browse/EX-5649)
+- **base-modal:** add prop to allow the modal to move the focus to an element within it on open
+  (#748) ([0954926](https://github.com/empathyco/x/commit/0954926d7e95ab53e3a8fe263265b63f1a5f20d7))
+- **build:** Fix build side effects to include css.
+  ([f79d7b9](https://github.com/empathyco/x/commit/f79d7b9e738485e14ac8f88b343a97d8f55c51e6)),
+  closes [EX-5396](https://searchbroker.atlassian.net/browse/EX-5396)
+- **build:** supports being built on Windows based machines
+  ([6e760fa](https://github.com/empathyco/x/commit/6e760fab8d39162897574abab95884cadd6252b8))
+- **components:** now properly checks if a has content (#612)
+  ([ad2f6dc](https://github.com/empathyco/x/commit/ad2f6dc522d9da59dde2e2c5f90510c0f93380ab)),
+  closes [EX-6681](https://searchbroker.atlassian.net/browse/EX-6681)
+- **components:** `SlidingPanel` can now disable the resetting scroll … (#286)
+  ([788eb18](https://github.com/empathyco/x/commit/788eb18bf0e066d932484143d0412497f3dada6e)),
+  closes [EX-5197](https://searchbroker.atlassian.net/browse/EX-5197)
+- **components:** Add option to extend transitions with listeners and attributes (#600)
+  ([16d5262](https://github.com/empathyco/x/commit/16d5262ab2213d53c736e89774089313755abeff)),
+  closes [EX-6457](https://searchbroker.atlassian.net/browse/EX-6457)
+- **components:** Export missing layout components
+  ([15986f5](https://github.com/empathyco/x/commit/15986f56b8b78b49abe70936c0bd2ba6d85a6bbb)),
+  closes [EX-5160](https://searchbroker.atlassian.net/browse/EX-5160)
+- **components:** Fix BaseGrid auto columns CSS. (#308)
+  ([77563f0](https://github.com/empathyco/x/commit/77563f0eb71d806fb2cefb88b750c4852918b8c0)),
+  closes [EX-5295](https://searchbroker.atlassian.net/browse/EX-5295)
+- **components:** Fix infinite scroll not working in Android Chrome. (#277)
+  ([19c3d77](https://github.com/empathyco/x/commit/19c3d77f124a1bbc099bae0e5dbb80fb30a132a1)),
+  closes [EX-5181](https://searchbroker.atlassian.net/browse/EX-5181)
+- **components:** Fix the error on console in `BaseResultImage` with `CrossFade` Animation. (#688)
+  ([3bcf6e1](https://github.com/empathyco/x/commit/3bcf6e120918b4257f38ddb5078adfe39a7c8a3f)),
+  closes [EX-6924](https://searchbroker.atlassian.net/browse/EX-6924)
+- **components:** restore scroll on `BaseModal` (#736)
+  ([d7b18a1](https://github.com/empathyco/x/commit/d7b18a1630f7da36ecd4c52f5b73b8c101612a86)),
+  closes [EX-7091](https://searchbroker.atlassian.net/browse/EX-7091)
+- conflict version (#673)
+  ([fb74dd0](https://github.com/empathyco/x/commit/fb74dd0b992522a9441da1daabe5a8789426324f)),
+  closes [EX-6896](https://searchbroker.atlassian.net/browse/EX-6896)
+- **decorators:** pending `debounced` execution is cancelled when the component is destroyed
+  ([27da789](https://github.com/empathyco/x/commit/27da789412804f3f768d07e8ffd846ea2df8553e)),
+  closes [EX-5215](https://searchbroker.atlassian.net/browse/EX-5215)
+- **design-system:** Fix grid styles to stretch cells.
+  ([3292229](https://github.com/empathyco/x/commit/32922290173cc87fe5c82934b9a9e01dc27b3c23)),
+  closes [EX-5239](https://searchbroker.atlassian.net/browse/EX-5239)
+- **design-system:** Fix Sliding Panel styles.
+  ([bcf2092](https://github.com/empathyco/x/commit/bcf20925c3baf7847792b7b77b07178d62a27e7e)),
+  closes [EX-5234](https://searchbroker.atlassian.net/browse/EX-5234)
+- **design-system:** Fix some style issues and add two missing utilities
+  ([c4ae728](https://github.com/empathyco/x/commit/c4ae728d78b36ee566ca283626e36bf9b6aed07f)),
+  closes [EX-5270](https://searchbroker.atlassian.net/browse/EX-5270)
+- **extra-params:** prevent callbacks option from the snippet config to be taken as extra params
+  ([2940d2c](https://github.com/empathyco/x/commit/2940d2c7163904a193c459892792b2153de7d079)),
+  closes [EX-5104](https://searchbroker.atlassian.net/browse/EX-5104)
+- **facets:** fix `SingleSelectModifier` handling for selecting hierar… (#643)
+  ([d9a18e0](https://github.com/empathyco/x/commit/d9a18e06c5241c5b6db9b93ba67c1d9018360160)),
+  closes [EX-6810](https://searchbroker.atlassian.net/browse/EX-6810)
+- Fix multiple issues.
+  ([2f5515e](https://github.com/empathyco/x/commit/2f5515e5bcaca67f085ff3eef4fb52698041292c)),
+  closes [EX-5179](https://searchbroker.atlassian.net/browse/EX-5179)
+- **identifier-results:** Fix default plugin config. (#296)
+  ([68d4b93](https://github.com/empathyco/x/commit/68d4b93f3f8d439814a11055ac657c0bce5accfd)),
+  closes [EX-5247](https://searchbroker.atlassian.net/browse/EX-5247)
+  [EX-5247](https://searchbroker.atlassian.net/browse/EX-5247)
+- Make `Home` grid next queries use grid data rather than state data. (#687)
+  ([e340ed0](https://github.com/empathyco/x/commit/e340ed0c4fc4d70a0912c38296812c2fcc0c4e23)),
+  closes [EX-6955](https://searchbroker.atlassian.net/browse/EX-6955)
+- prevent node-ipc vulnerability
+  ([fc8b83c](https://github.com/empathyco/x/commit/fc8b83ce73bdbd7148ce99ad3a95d7a7658bd8ba))
+- **related-tags:** clear selected related tags when user changes extra params
+  ([b2d9b94](https://github.com/empathyco/x/commit/b2d9b94053aebbbda41659dbc3e4602931fd1bb5)),
+  closes [EX-5188](https://searchbroker.atlassian.net/browse/EX-5188)
+- **related-tags:** related tags are now kept when navigating back
+  ([db9f875](https://github.com/empathyco/x/commit/db9f87560000bca05ad3fe06fc449e170c3b9d08)),
+  closes [EX-6131](https://searchbroker.atlassian.net/browse/EX-6131)
+- **related-tags:** use `query` instead of `tag` as `key` to ensure unique values (#792)
+  ([53e86bd](https://github.com/empathyco/x/commit/53e86bd43137a9e4cd389f58e0efce8bcf63632c)),
+  closes [EX-7236](https://searchbroker.atlassian.net/browse/EX-7236)
+- Remove `@empathyco/x-platform-adapter` dependency from library code. (#575)
+  ([104c7e1](https://github.com/empathyco/x/commit/104c7e10855a67b2adfa68d42d82431f9194ee15)),
+  closes [EX-6437](https://searchbroker.atlassian.net/browse/EX-6437)
+- **search:** batch state reset calls after a search.request parameter changes (#283)
+  ([492e856](https://github.com/empathyco/x/commit/492e8566913428426459ada29ca4963730cfcd7c)),
+  closes [EX-5057](https://searchbroker.atlassian.net/browse/EX-5057)
+- **search:** next page is now requested if it has less than the page size results. (#284)
+  ([f574792](https://github.com/empathyco/x/commit/f5747923f60f81564ebf124d95cae8a5d92400d4)),
+  closes [EX-5194](https://searchbroker.atlassian.net/browse/EX-5194)
+- **search:** rows and start parameters calculations moved from getter to action to avoid multiple
+  requests
+  ([84752ba](https://github.com/empathyco/x/commit/84752ba3eb1ab728b6adf5cc62ea31646f42b959)),
+  closes [EX-5047](https://searchbroker.atlassian.net/browse/EX-5047)
+- **tagging:** now removing the session clears the session from the storage
+  ([9328aad](https://github.com/empathyco/x/commit/9328aadca920825bdaddeb565ee47ef0430f25fd)),
+  closes [EX-5074](https://searchbroker.atlassian.net/browse/EX-5074)
+- **tests:** unable to add breakpoints in vue components (#460)
+  ([5d58b9b](https://github.com/empathyco/x/commit/5d58b9b637ad47606651db2415502cf082d5a15b)),
+  closes [EX-5325](https://searchbroker.atlassian.net/browse/EX-5325)
+- **url:** a `query` is required to store params in the `URL`
+  ([b105da3](https://github.com/empathyco/x/commit/b105da33b35aaa1e3796790d0ec88c74caf856e5)),
+  closes [EX-6134](https://searchbroker.atlassian.net/browse/EX-6134)
+- **url:** default `extra params` are now properly restored
+  ([5540929](https://github.com/empathyco/x/commit/554092985a394e1d2b6087b1129282993da7e8c6)),
+  closes [EX-5203](https://searchbroker.atlassian.net/browse/EX-5203)
+- wait for the extra params to make the initial requests (#754)
+  ([468a61b](https://github.com/empathyco/x/commit/468a61b69e11b3917a33d44bd415a5ea14c5c409)),
+  closes [EX-6977](https://searchbroker.atlassian.net/browse/EX-6977)
+
+### Code Refactoring
+
+- change to the top of the wiring the ParamsLoadedFromUrl event.
+  ([26634c8](https://github.com/empathyco/x/commit/26634c8010bc4d2e795caceefc622c6329fad72c)),
+  closes [EX-5327](https://searchbroker.atlassian.net/browse/EX-5327)
+- move `NonPrimitive`, `Primitive` and `AnyFunction` types from `x-components` to `x-utils`
+  ([7efe460](https://github.com/empathyco/x/commit/7efe4605303492e2de6f42d844f1c3244e0bcef1)),
+  closes [EX-5792](https://searchbroker.atlassian.net/browse/EX-5792)
+- move `object` utils from `x-components` to `x-utils`
+  ([512b350](https://github.com/empathyco/x/commit/512b350da4a3dd73ddbd78a7b2965a1e07735a8e)),
+  closes [EX-5793](https://searchbroker.atlassian.net/browse/EX-5793)
+- Move aside to its own component in Home view. (#581)
+  ([5b40994](https://github.com/empathyco/x/commit/5b40994af47c268ed10f06624ac1fdc634523a6d)),
+  closes [EX-6525](https://searchbroker.atlassian.net/browse/EX-6525)
+- move DeepPartial type from x-components to x-utils
+  ([a26f0c5](https://github.com/empathyco/x/commit/a26f0c54317f17144b4262c60b0a0dc086883eb9)),
+  closes [EX-5835](https://searchbroker.atlassian.net/browse/EX-5835)
+
+- feat(design-system): Re-do aspect ratio logic with modern `aspect-ratio` property
+  ([7fae9dc](https://github.com/empathyco/x/commit/7fae9dcab71ec8a945f70aa706cce1cb57b4ddd8)),
+  closes [EX-6463](https://searchbroker.atlassian.net/browse/EX-6463)
+
+### Build System
+
+- **dependencies:** fix Vue & Vuex versions (#686)
+  ([177e851](https://github.com/empathyco/x/commit/177e8511f4458fa13c627210cdfbbf6d42a85b17)),
+  closes [EX-6918](https://searchbroker.atlassian.net/browse/EX-6918)
+- **deps:** update eslint-plugin dependencies (#447)
+  ([51d60f0](https://github.com/empathyco/x/commit/51d60f0e11fa9667a784bbdb10ba1f39159b382f)),
+  closes [EX-5383](https://searchbroker.atlassian.net/browse/EX-5383)
+- **deps:** Upgrade Cypress and Vue Cli plugins versions. (#399)
+  ([630d6b0](https://github.com/empathyco/x/commit/630d6b0d767a3484140ecd252e2be10817e0900d)),
+  closes [EX-5417](https://searchbroker.atlassian.net/browse/EX-5417)
+- Fix colors.js dependency issue
+  ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)),
+  closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+- Load PostCSS plugins from rollup build (#272)
+  ([aaed2f3](https://github.com/empathyco/x/commit/aaed2f328b0b7252853922703283c77bcd1221d0)),
+  closes [EX-5162](https://searchbroker.atlassian.net/browse/EX-5162)
+- remove `polyfills` support
+  ([a06fcf3](https://github.com/empathyco/x/commit/a06fcf333b06a4d26c32304127f02125d101a0fd)),
+  closes [EX-3559](https://searchbroker.atlassian.net/browse/EX-3559)
+- Support SSR with createInjectorSSR for styles. (#674)
+  ([85473c3](https://github.com/empathyco/x/commit/85473c31f5aa755890bef4d20f787ba1453b8843)),
+  closes [EX-6892](https://searchbroker.atlassian.net/browse/EX-6892)
+- sync duplicated dependencies (#567)
+  ([912e968](https://github.com/empathyco/x/commit/912e9687851594871b3296a5fb26129327939d96)),
+  closes [EX-6412](https://searchbroker.atlassian.net/browse/EX-6412)
+- update jest dependencies
+  ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)),
+  closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+### Testing
+
+- E2E tests maintenance (#371) [[EX-5618](https://searchbroker.atlassian.net/browse/EX-5618)]
+  ([e12ca33](https://github.com/empathyco/x/commit/e12ca335235c654f5e1e9ae608950bf527954448))
+- **e2e:** add `extra-params` scenarios
+  ([4275c28](https://github.com/empathyco/x/commit/4275c2811ea7b0eaaf588fa4d96a7ae3cf4c43c7)),
+  closes [EX-5377](https://searchbroker.atlassian.net/browse/EX-5377)
+- **e2e:** fix `tagging` using the `mockedAdapter` and replacing `fetch` for `sendBeacon`
+  ([cf06d2f](https://github.com/empathyco/x/commit/cf06d2f7e9aff3987bc14fa46cd65eace402e612)),
+  closes [EX-5374](https://searchbroker.atlassian.net/browse/EX-5374)
+- **e2e:** Fix E2E tests in Firefox
+  ([6d25577](https://github.com/empathyco/x/commit/6d25577ad383e6e82a3072eb22809872dc0dc865)),
+  closes [EX-5525](https://searchbroker.atlassian.net/browse/EX-5525)
+- **e2e:** fix tagging tests (#270)
+  ([ff2ecba](https://github.com/empathyco/x/commit/ff2ecbac79fd3c16d72a05c133dbe0b60de606f7)),
+  closes [EX-5161](https://searchbroker.atlassian.net/browse/EX-5161)
+- **e2e:** make `tagging` tests wait for redirection before assertion
+  ([f98cd25](https://github.com/empathyco/x/commit/f98cd254084f60893b1eb723d4081bf0c0f44166)),
+  closes [EX-5273](https://searchbroker.atlassian.net/browse/EX-5273)
+- **e2e:** make url tests intercept tracking and wait for each request
+  ([393dbea](https://github.com/empathyco/x/commit/393dbea71648b010a4f3d197c180c91741c6054b)),
+  closes [EX-5127](https://searchbroker.atlassian.net/browse/EX-5127)
+- **e2e:** Reduce command timeout and number of retries.
+  ([5e1521f](https://github.com/empathyco/x/commit/5e1521f53aad1e4bfc8f60c7e705422ab2af052c)),
+  closes [EX-5015](https://searchbroker.atlassian.net/browse/EX-5015)
+- **e2e:** reorder mocked responses
+  ([8cab691](https://github.com/empathyco/x/commit/8cab691b553af31d9b5bc80130e16886877f1b60)),
+  closes [EX-4923](https://searchbroker.atlassian.net/browse/EX-4923)
+- **e2e:** search modal re-opens properly after being closed (#613)
+  ([43282ab](https://github.com/empathyco/x/commit/43282ab1d0ab54af7794c88c89aa8e62326d73d8)),
+  closes [EX-6708](https://searchbroker.atlassian.net/browse/EX-6708)
+- fix exclude-filters e2e test (#588)
+  ([51ecc52](https://github.com/empathyco/x/commit/51ecc5234b665a2320a760d485bf6da74648f902)),
+  closes [EX-6590](https://searchbroker.atlassian.net/browse/EX-6590)
+- **next-queries:** next queries preview e2e tests (#759)
+  ([adccbf4](https://github.com/empathyco/x/commit/adccbf4a111ac65915b017aca799ac523347ddc1)),
+  closes [EX-6848](https://searchbroker.atlassian.net/browse/EX-6848)
+- Restructure files for non global step def (#382)
+  ([d212692](https://github.com/empathyco/x/commit/d21269273e87e58312fde996fd9be3e5883958b4)),
+  closes [EX-5739](https://searchbroker.atlassian.net/browse/EX-5739)
+  [EX-5739](https://searchbroker.atlassian.net/browse/EX-5739)
+  [EX-5739](https://searchbroker.atlassian.net/browse/EX-5739)
+
+### Documentation
+
+- activating ready live-examples
+  ([953e6c2](https://github.com/empathyco/x/commit/953e6c2ead73cd464fbb861bcc917134eac478a1)),
+  closes [EX-5705](https://searchbroker.atlassian.net/browse/EX-5705)
+- add `queriesPreview` to archetype integration (#735)
+  ([57c719a](https://github.com/empathyco/x/commit/57c719a55208e149c9382483df02ac84cac33259)),
+  closes [EX-6613](https://searchbroker.atlassian.net/browse/EX-6613)
+- add guide for integrating X Interface into an existing website
+  ([9e14a52](https://github.com/empathyco/x/commit/9e14a52389c77deede822643e50b34e5bbf78ddf)),
+  closes [EX-5143](https://searchbroker.atlassian.net/browse/EX-5143)
+- add local storage info and data purposes
+  ([c1b0b05](https://github.com/empathyco/x/commit/c1b0b05cd9260227cb0689283ff27f34a2b01e51)),
+  closes [EX-4123](https://searchbroker.atlassian.net/browse/EX-4123)
+- Add module type to integration script docs (#592)
+  ([907bda8](https://github.com/empathyco/x/commit/907bda8b4d825c93461089691f284c1758624a89))
+- add new static docs.
+  ([8a40986](https://github.com/empathyco/x/commit/8a409865fea2cd67e0c2daa5d4464f553ff33a2b)),
+  closes [EX-5033](https://searchbroker.atlassian.net/browse/EX-5033)
+- bring functional docs from eDocs project (#630)
+  ([27e6dd6](https://github.com/empathyco/x/commit/27e6dd646084983c37fc52894dc95544253405d5)),
+  closes [EX-6237](https://searchbroker.atlassian.net/browse/EX-6237)
+- change h1 to be h2
+  ([a7e16c6](https://github.com/empathyco/x/commit/a7e16c616fe2593eccf93799f9a46c688857b35b)),
+  closes [EX-5064](https://searchbroker.atlassian.net/browse/EX-5064)
+- clarify how to subscribe to any `XEvent` (#645)
+  ([d57941a](https://github.com/empathyco/x/commit/d57941a52d23f56cb7c04ed49b816a252473243f)),
+  closes [EX-6816](https://searchbroker.atlassian.net/browse/EX-6816)
+- fix broken link in x-components readme (#561)
+  ([7e3f551](https://github.com/empathyco/x/commit/7e3f551866709299e0f7d2d9e282c890dc2faa21))
+- fix links and minor typos
+  ([e0197d5](https://github.com/empathyco/x/commit/e0197d5bff978048aed39dff5878d60682b7aa9f)),
+  closes [EX-6125](https://searchbroker.atlassian.net/browse/EX-6125)
+- fix links and update repository information and development setup for `x-components` (#394)
+  ([64d2118](https://github.com/empathyco/x/commit/64d2118f95673048df7e1a791ec3ae26da316ec9))
+- fix multiple broken links
+  ([226a2e5](https://github.com/empathyco/x/commit/226a2e54a4ed8832c7c47d26254e85c301913d98)),
+  closes [EX-5035](https://searchbroker.atlassian.net/browse/EX-5035)
+- **functional:** add my history ui and related docs (#685)
+  ([3a9ac8a](https://github.com/empathyco/x/commit/3a9ac8a769d64196b31f05872fb92ec26dc635ad))
+- **functional:** titles refactor and change image source (#790)
+  ([cc177a5](https://github.com/empathyco/x/commit/cc177a5bad6fab363d40140e699e11e0ec6bc53c))
+- Remove docusaurus headers
+  ([6252165](https://github.com/empathyco/x/commit/62521658374eb5c78112314502606e2d82113a95)),
+  closes [EX-5081](https://searchbroker.atlassian.net/browse/EX-5081)
+- review build search UI docs
+  ([fc72ad7](https://github.com/empathyco/x/commit/fc72ad78fbff0deaa2f1a417c8e7f005ea2c8470))
+- update archetype integration and x-adapter docs (#628)
+  ([247899e](https://github.com/empathyco/x/commit/247899e39d4f415f59b8ec1b7376fc72530028c2)),
+  closes [EX-6728](https://searchbroker.atlassian.net/browse/EX-6728)
+- Update documentation to differentiate integration from development
+  ([fc8d9fa](https://github.com/empathyco/x/commit/fc8d9faa57faafee90c0f4da159b6040294c099c)),
+  closes [EX-5608](https://searchbroker.atlassian.net/browse/EX-5608)
+- update functional docs callout formatting (#671)
+  ([5f1de74](https://github.com/empathyco/x/commit/5f1de74c2e86adb638d692781483cac1ccf70a71))
+
+### Continuous Integration
+
+- export webpack config from `x-archetype-utils` (#760)
+  ([0d7bfa2](https://github.com/empathyco/x/commit/0d7bfa2a63b5aaa3b220a0338fcefdaedc888f32)),
+  closes [EX-7222](https://searchbroker.atlassian.net/browse/EX-7222)
+- release alpha version on every push to main branch
+  ([f86e0b3](https://github.com/empathyco/x/commit/f86e0b3ad14e7a9bd6d659219fe12f6d94ebdb94)),
+  closes [EX-5263](https://searchbroker.atlassian.net/browse/EX-5263)
+- silent jest and eslint warnings (#749)
+  ([1413677](https://github.com/empathyco/x/commit/14136776e6a616e21ecd4585a071cdee1569d1cb))
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+- update rollup and plugins version
+  ([d240f3d](https://github.com/empathyco/x/commit/d240f3de8bc3e226d0bd8ac2d9bd4282cc660b86)),
+  closes [EX-5342](https://searchbroker.atlassian.net/browse/EX-5342)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [3.0.0-alpha.202](https://github.com/empathyco/x/compare/@empathyco/x-components@3.0.0-alpha.201...@empathyco/x-components@3.0.0-alpha.202) (2022-10-24)
 
 **Note:** Version bump only for package @empathyco/x-components

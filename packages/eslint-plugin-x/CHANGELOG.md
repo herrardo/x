@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.16](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.2...@empathyco/eslint-plugin-x@2.0.0-alpha.16) (2022-10-25)
+
+### ⚠ BREAKING CHANGES
+
+- **facets:** Removed the `setFilter`mutation from `facets` X-Module. Use `mutateFilter` instead.
+- **facets:** Modified the `HierarchicalFilter.children` Model type. Now it is an
+  `Array<HierarchicalFilter>` instead of an array of ids.
+- Request types moved to `x-types` package. Change the imports from `x-adapter` to `x-type`.
+- Removed `TaggingInfo` type. Use `TaggingRequest` from `@empathyco/x-types` instead.
+- standard-version dependency has been removed from eslint-plugin-x package
+
+### Features
+
+- add `vue devtools` plugin to ease `XEvents` and `wiring` visualization (#215)
+  ([bd148ec](https://github.com/empathyco/x/commit/bd148ecb9682f8d4161d278c03f110f8f050d323)),
+  closes [EX-7032](https://searchbroker.atlassian.net/browse/EX-7032)
+- disable `@typescript-eslint/no-extra-parens` rule (#715)
+  ([3718017](https://github.com/empathyco/x/commit/3718017c5528156f931bc8b1f2d208cdb50781ed)),
+  closes [EX-6996](https://searchbroker.atlassian.net/browse/EX-6996)
+- disable v-slot-style
+  ([2e8c2d9](https://github.com/empathyco/x/commit/2e8c2d93605b6a694e84c98f955ee7acfdfd35e3)),
+  closes [EX-6284](https://searchbroker.atlassian.net/browse/EX-6284)
+- **eslint:** add `vuejs-accessibility` plugin (#427)
+  ([6789771](https://github.com/empathyco/x/commit/6789771ab88a909552da74095694a4c2a191a51d)),
+  closes [EX-5845](https://searchbroker.atlassian.net/browse/EX-5845)
+- extract SessionService to x-utils package
+  ([5268808](https://github.com/empathyco/x/commit/52688087e577dfd7ce9b0669b21ada75ae67053c))
+- **facets:** Move filters flattening from `x-adapter-platform` to `x-components`. (#626)
+  ([2bebaeb](https://github.com/empathyco/x/commit/2bebaeb2863fe794f1b3bea924904651b9302ef6)),
+  closes [EX-6484](https://searchbroker.atlassian.net/browse/EX-6484)
+- Improve tailwindcss types. (#725)
+  ([14dec97](https://github.com/empathyco/x/commit/14dec974174cd18e63cb5f4e9a690a9989de44bc)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+- move `Request` types to `x-types` package
+  ([7cc85c1](https://github.com/empathyco/x/commit/7cc85c1d371b604b3188d8cc2076eab5fc9460e4)),
+  closes [EX-6066](https://searchbroker.atlassian.net/browse/EX-6066)
+- **typeguards:** add isPath
+  ([3c23ed0](https://github.com/empathyco/x/commit/3c23ed0c094161d787d24b2327d0884e41531878)),
+  closes [EX-5802](https://searchbroker.atlassian.net/browse/EX-5802)
+- update typescript
+  ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)),
+  closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+- **url:** set `origin` when navigating
+  ([02aa766](https://github.com/empathyco/x/commit/02aa7661a15c3718f4809d094a01b0f684a1f55d)),
+  closes [EX-3541](https://searchbroker.atlassian.net/browse/EX-3541)
+
+### Others
+
+- remove standard-version from eslint-plugin-x
+  ([256c9d0](https://github.com/empathyco/x/commit/256c9d051ca1d36cf465fa4ca9a00dfc1d986ae7)),
+  closes [EX-5526](https://searchbroker.atlassian.net/browse/EX-5526)
+
+### Build System
+
+- **deps:** update eslint-plugin dependencies (#447)
+  ([51d60f0](https://github.com/empathyco/x/commit/51d60f0e11fa9667a784bbdb10ba1f39159b382f)),
+  closes [EX-5383](https://searchbroker.atlassian.net/browse/EX-5383)
+- **deps:** Upgrade Cypress and Vue Cli plugins versions. (#399)
+  ([630d6b0](https://github.com/empathyco/x/commit/630d6b0d767a3484140ecd252e2be10817e0900d)),
+  closes [EX-5417](https://searchbroker.atlassian.net/browse/EX-5417)
+- Fix colors.js dependency issue
+  ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)),
+  closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+- sync duplicated dependencies (#567)
+  ([912e968](https://github.com/empathyco/x/commit/912e9687851594871b3296a5fb26129327939d96)),
+  closes [EX-6412](https://searchbroker.atlassian.net/browse/EX-6412)
+- update jest dependencies
+  ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)),
+  closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [2.0.0-alpha.15](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.14...@empathyco/eslint-plugin-x@2.0.0-alpha.15) (2022-10-14)
 
 ### Continuous Integration

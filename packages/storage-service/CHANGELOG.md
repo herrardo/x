@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.5](https://github.com/empathyco/x/compare/@empathyco/x-storage-service@1.4.0-alpha.0...@empathyco/x-storage-service@2.0.0-alpha.5) (2022-10-25)
+
+### ⚠ BREAKING CHANGES
+
+- **storage-service:** `StorageService` has been renamed to `BrowserStorageService`.
+
+### Features
+
+- disable `@typescript-eslint/no-extra-parens` rule (#715)
+  ([3718017](https://github.com/empathyco/x/commit/3718017c5528156f931bc8b1f2d208cdb50781ed)),
+  closes [EX-6996](https://searchbroker.atlassian.net/browse/EX-6996)
+- **storage-service:** Rename `StorageService` to `BrowserStorageService`
+  ([6bf38fb](https://github.com/empathyco/x/commit/6bf38fb7d14323c84c949e21eaa9c692fb0014d7)),
+  closes [EX-5073](https://searchbroker.atlassian.net/browse/EX-5073)
+- update typescript
+  ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)),
+  closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+
+### Build System
+
+- Fix colors.js dependency issue
+  ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)),
+  closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+- update jest dependencies
+  ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)),
+  closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [2.0.0-alpha.4](https://github.com/empathyco/x/compare/@empathyco/x-storage-service@2.0.0-alpha.3...@empathyco/x-storage-service@2.0.0-alpha.4) (2022-10-14)
 
 ### Continuous Integration

@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.0-alpha.23 (2022-10-25)
+
+### Features
+
+- **design-system:** Add `button` component to the Design System. (#738)
+  ([36c14a6](https://github.com/empathyco/x/commit/36c14a6e4057cf4f03d9bf2ba29a7e2141170e67)),
+  closes [EX-6797](https://searchbroker.atlassian.net/browse/EX-6797)
+- **design-system:** add `tailwindcss` to `x-components` and configure it to use `x-tailwindcss`
+  (#655)
+  ([4109a8a](https://github.com/empathyco/x/commit/4109a8ad9d29378078603d97e31c073ceb2671ae)),
+  closes [EX-6793](https://searchbroker.atlassian.net/browse/EX-6793)
+- **design-system:** generate old design system tokens with tailwind values (#675)
+  ([7aa42e4](https://github.com/empathyco/x/commit/7aa42e4e26ec34fea942bbf7f0c7f10a97a94237)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+- **design-system:** update color names and values (#785)
+  ([6826c48](https://github.com/empathyco/x/commit/6826c4845249cfa14793a81553214670b8c895c8)),
+  closes [EX-7163](https://searchbroker.atlassian.net/browse/EX-7163)
+- Improve `tailwindcss` types (#730)
+  ([b7ab20c](https://github.com/empathyco/x/commit/b7ab20cfb0faa7f21fdf4aaaa4ae3e6d44bc6a79)),
+  closes [EX-7041](https://searchbroker.atlassian.net/browse/EX-7041)
+- improve documentation in x-tailwind plugin (#756)
+  ([0503502](https://github.com/empathyco/x/commit/0503502962ff3d82a7ddbc1e84563bd88436b49b)),
+  closes [EX-7129](https://searchbroker.atlassian.net/browse/EX-7129)
+- Improve tailwindcss types. (#725)
+  ([14dec97](https://github.com/empathyco/x/commit/14dec974174cd18e63cb5f4e9a690a9989de44bc)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+- **theme:** add custom default values
+  ([e025392](https://github.com/empathyco/x/commit/e0253924bdb6d9a75450ddaf696f47f7e9d2f6ba)),
+  closes [EX-5717](https://searchbroker.atlassian.net/browse/EX-5717)
+- **types:** add autocomplete to theme function in TailwindHelpers (#788)
+  ([d1c7a29](https://github.com/empathyco/x/commit/d1c7a290d1c95f03941f451069fe321ee142f998)),
+  closes [EX-7085](https://searchbroker.atlassian.net/browse/EX-7085)
+
+### Code Refactoring
+
+- rename package to `x-tailwindcss`
+  ([f261bf1](https://github.com/empathyco/x/commit/f261bf184da69f66a0f30e6ad68568acea68cb7c)),
+  closes [EX-5963](https://searchbroker.atlassian.net/browse/EX-5963)
+
+### Build System
+
+- sync duplicated dependencies (#567)
+  ([912e968](https://github.com/empathyco/x/commit/912e9687851594871b3296a5fb26129327939d96)),
+  closes [EX-6412](https://searchbroker.atlassian.net/browse/EX-6412)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [0.2.0-alpha.22](https://github.com/empathyco/x/compare/@empathyco/x-tailwindcss@0.2.0-alpha.21...@empathyco/x-tailwindcss@0.2.0-alpha.22) (2022-10-19)
 
 ### Features

@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.0-alpha.40](https://github.com/empathyco/x/compare/@empathyco/x-types@10.0.0-alpha.11...@empathyco/x-types@10.0.0-alpha.40) (2022-10-25)
+
+### ⚠ BREAKING CHANGES
+
+- **tagging:** `tagging` property of `Taggable` and `queryTagging` property of `SearchResponse` are
+  optional.
+- **result:** `Result` model properties are optional, except `id`, `modelName` and `tagging`.
+- **facets:** Removed the `setFilter`mutation from `facets` X-Module. Use `mutateFilter` instead.
+- **facets:** Modified the `HierarchicalFilter.children` Model type. Now it is an
+  `Array<HierarchicalFilter>` instead of an array of ids.
+- Request types moved to `x-types` package. Change the imports from `x-adapter` to `x-type`.
+- Removed `TaggingInfo` type. Use `TaggingRequest` from `@empathyco/x-types` instead.
+- Remove `selected` and `previous` logic from related tags.
+- Remove `EmpathyRequestRelatedTagsQueryMapper`.
+
+### Features
+
+- **design-system:** add `curated` modifier to the `suggestion`
+  ([dd229fd](https://github.com/empathyco/x/commit/dd229fd3d64840ed3041bec618a1a23e3726430d)),
+  closes [EX-5290](https://searchbroker.atlassian.net/browse/EX-5290)
+- **facets:** Move filters flattening from `x-adapter-platform` to `x-components`. (#626)
+  ([2bebaeb](https://github.com/empathyco/x/commit/2bebaeb2863fe794f1b3bea924904651b9302ef6)),
+  closes [EX-6484](https://searchbroker.atlassian.net/browse/EX-6484)
+- move `Request` types to `x-types` package
+  ([7cc85c1](https://github.com/empathyco/x/commit/7cc85c1d371b604b3188d8cc2076eab5fc9460e4)),
+  closes [EX-6066](https://searchbroker.atlassian.net/browse/EX-6066)
+- move `response` types to `@empathyco/x-types`
+  ([77fb812](https://github.com/empathyco/x/commit/77fb812b77fe0c84462a4b5b2eb7f0439e2d8061)),
+  closes [EX-6092](https://searchbroker.atlassian.net/browse/EX-6092)
+- move related tags concatenation logic (#365)
+  ([4e71797](https://github.com/empathyco/x/commit/4e717970198f67018a9b66ed6e47f511ecef4c62)),
+  closes [EX-5410](https://searchbroker.atlassian.net/browse/EX-5410)
+- **next-queries:** add `isCurated` property to `NextQuery` model
+  ([fdd89f8](https://github.com/empathyco/x/commit/fdd89f84afe7e328cdcd121288142dc82e2000c8)),
+  closes [EX-5152](https://searchbroker.atlassian.net/browse/EX-5152)
+- **next-queries:** add next query preview logic (#611)
+  ([fc611fa](https://github.com/empathyco/x/commit/fc611faa39e63e5f916cd19928e9ab0755f8dc7f)),
+  closes [EX-6119](https://searchbroker.atlassian.net/browse/EX-6119)
+- **related-tags:** add `isCurated` property to related tags
+  ([e063f45](https://github.com/empathyco/x/commit/e063f4560573bcb1bf32fbe49753f2fe6b235cc7)),
+  closes [EX-4940](https://searchbroker.atlassian.net/browse/EX-4940)
+- **result:** add `variants` support (#644)
+  ([d5db09e](https://github.com/empathyco/x/commit/d5db09e9be92d0df65329680ee286959030ccecc)),
+  closes [EX-6760](https://searchbroker.atlassian.net/browse/EX-6760)
+- **tagging:** make `tagging` and `queryTagging` optional (#797)
+  ([0e49156](https://github.com/empathyco/x/commit/0e49156308d4e77d667a2191697101674cdbf213)),
+  closes [EX-7231](https://searchbroker.atlassian.net/browse/EX-7231)
+- update typescript
+  ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)),
+  closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+
+### Bug Fixes
+
+- fix request types
+  ([7998113](https://github.com/empathyco/x/commit/79981132fc510ee7a313393ad98b67caac2b6c7b)),
+  closes [EX-6302](https://searchbroker.atlassian.net/browse/EX-6302)
+- Remove `@empathyco/x-platform-adapter` dependency from library code. (#575)
+  ([104c7e1](https://github.com/empathyco/x/commit/104c7e10855a67b2adfa68d42d82431f9194ee15)),
+  closes [EX-6437](https://searchbroker.atlassian.net/browse/EX-6437)
+
+### Build System
+
+- Fix colors.js dependency issue
+  ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)),
+  closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+- update jest dependencies
+  ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)),
+  closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+### Code Refactoring
+
+- make extra params optional (#553)
+  ([ef7493a](https://github.com/empathyco/x/commit/ef7493a00a4da73f544f3a32b9e8a1fd68ba23a0)),
+  closes [EX-6335](https://searchbroker.atlassian.net/browse/EX-6335)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+- update rollup and plugins version
+  ([d240f3d](https://github.com/empathyco/x/commit/d240f3de8bc3e226d0bd8ac2d9bd4282cc660b86)),
+  closes [EX-5342](https://searchbroker.atlassian.net/browse/EX-5342)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [10.0.0-alpha.39](https://github.com/empathyco/x/compare/@empathyco/x-types@10.0.0-alpha.38...@empathyco/x-types@10.0.0-alpha.39) (2022-10-21)
 
 ### ⚠ BREAKING CHANGES

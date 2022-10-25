@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-alpha.5](https://github.com/empathyco/x/compare/@empathyco/x-get-safe-property-chain@1.3.0-alpha.0...@empathyco/x-get-safe-property-chain@1.3.0-alpha.5) (2022-10-25)
+
+### Features
+
+- update typescript
+  ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)),
+  closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+
+### Build System
+
+- Fix colors.js dependency issue
+  ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)),
+  closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+- update jest dependencies
+  ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)),
+  closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.3.0-alpha.4](https://github.com/empathyco/x/compare/@empathyco/x-get-safe-property-chain@1.3.0-alpha.3...@empathyco/x-get-safe-property-chain@1.3.0-alpha.4) (2022-10-14)
 
 ### Continuous Integration
