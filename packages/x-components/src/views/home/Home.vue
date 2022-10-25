@@ -5,58 +5,100 @@
     <PreselectedFilters />
     <UrlHandler query="q" store="store" />
     <SnippetCallbacks />
-    <BaseEventButton data-test="open-modal" :events="eventsToOpenX">Start</BaseEventButton>
-    <h1>Test controls</h1>
+    <OpenMainModal>Start</OpenMainModal>
+    <h1 class="x-font-bold x-text-4xl x-text-primary-50 x-leading-[1.5]">Test controls</h1>
     <ul class="x-test-controls x-list x-list--gap-05">
       <li class="x-test-controls__item x-list__item">
-        <label>
+        <label for="searchInput.instant">
+          search-input - instant
           <input
             v-model="controls.searchInput.instant"
+            id="searchInput.instant"
             type="checkbox"
             data-test="search-input-instant"
           />
-          search-input - instant
         </label>
       </li>
       <li class="x-test-controls__item x-list__item">
-        <label for="searchInput.instantDebounceInMs">search-input - debounce</label>
-        <input
-          v-model="controls.searchInput.instantDebounceInMs"
-          id="searchInput.instantDebounceInMs"
-          type="number"
-          data-test="search-input-debounce"
-        />
+        <label for="searchInput.instantDebounceInMs">
+          search-input - debounce
+          <input
+            v-model="controls.searchInput.instantDebounceInMs"
+            id="searchInput.instantDebounceInMs"
+            type="number"
+            data-test="search-input-debounce"
+          />
+        </label>
       </li>
       <li class="x-test-controls__item x-list__item">
-        <label for="popularSearches.maxItemsToRender">popular-searches - maxItemsToRender</label>
-        <input
-          v-model="controls.popularSearches.maxItemsToRender"
-          id="popularSearches.maxItemsToRender"
-          type="number"
-          data-test="popular-searches-max-to-render"
-        />
+        <label for="popularSearches.maxItemsToRender">
+          popular-searches - maxItemsToRender
+          <input
+            v-model="controls.popularSearches.maxItemsToRender"
+            id="popularSearches.maxItemsToRender"
+            type="number"
+            data-test="popular-searches-max-to-render"
+          />
+        </label>
       </li>
       <li class="x-test-controls__item x-list__item">
-        <label>
+        <label for="slicedFilters.max">
+          sliced-filters - max
           <input
             v-model="controls.slicedFilters.max"
+            id="slicedFilters.max"
             type="number"
             data-test="sliced-filters-max"
           />
-          sliced-filters - max
         </label>
       </li>
       <li class="x-test-controls__item x-list__item">
-        <label for="historyQueries.maxItemsToRender">history-queries - maxItemsToRender</label>
-        <input
-          v-model="controls.historyQueries.maxItemsToRender"
-          id="historyQueries.maxItemsToRender"
-          type="number"
-          data-test="history-queries-max-to-render"
-        />
+        <label for="historyQueries.maxItemsToRender">
+          history-queries - maxItemsToRender
+          <input
+            v-model="controls.historyQueries.maxItemsToRender"
+            id="historyQueries.maxItemsToRender"
+            type="number"
+            data-test="history-queries-max-to-render"
+          />
+        </label>
+      </li>
+      <li class="x-test-controls__item x-list__item">
+        <label for="nextQueriesPreview.maxItemsToRender">
+          next-queries-preview - maxItemsToRender
+          <input
+            v-model="controls.nextQueriesPreview.maxItemsToRender"
+            id="nextQueriesPreview.maxItemsToRender"
+            type="number"
+            data-test="nq-preview-max-to-render"
+          />
+        </label>
+      </li>
+      <li class="x-test-controls__item x-list__item">
+        <label for="nextQueriesPreview.maxItemsToRender">
+          next-queries-list - showOnlyAfterOffset
+          <input
+            v-model="controls.nextQueriesList.showOnlyAfterOffset"
+            id="nextQueriesList.showOnlyAfterOffset"
+            type="checkbox"
+            data-test="nq-preview-show-after-offset"
+          />
+        </label>
+      </li>
+      <li class="x-test-controls__item x-list__item">
+        <label for="adapter.e2eAdapter">
+          Use mocked adapter
+          <input
+            v-model="controls.adapter.useE2EAdapter"
+            @change="toggleE2EAdapter"
+            id="adapter.e2eAdapter"
+            type="checkbox"
+            data-test="adapter-e2e"
+          />
+        </label>
       </li>
     </ul>
-    <BaseEventsModal :eventsToOpenModal="eventsToOpenModal" :animation="modalAnimation">
+    <MainModal :animation="modalAnimation">
       <MultiColumnMaxWidthLayout class="x-background--neutral-100">
         <template #header-middle>
           <div
@@ -66,12 +108,14 @@
           >
             <BaseKeyboardNavigation>
               <div class="x-input-group x-input-group--card">
-                <SearchInput
-                  aria-label="Search for products"
-                  placeholder="Search"
-                  :instant="controls.searchInput.instant"
-                  :instant-debounce-in-ms="controls.searchInput.instantDebounceInMs"
-                />
+                <div class="x-input">
+                  <SearchInputPlaceholder :messages="searchInputPlaceholderMessages" />
+                  <SearchInput
+                    aria-label="Search for products"
+                    :instant="controls.searchInput.instant"
+                    :instant-debounce-in-ms="controls.searchInput.instantDebounceInMs"
+                  />
+                </div>
                 <ClearSearchInput aria-label="Clear query">Clear</ClearSearchInput>
                 <SearchButton aria-label="Search" class="x-input-group__action">
                   <SearchIcon />
@@ -100,9 +144,9 @@
         </template>
 
         <template #header-end>
-          <BaseEventButton class="x-button--ghost" :events="eventsToCloseX">
+          <CloseMainModal class="x-button x-button--ghost">
             <CrossIcon />
-          </BaseEventButton>
+          </CloseMainModal>
         </template>
 
         <template #sub-header>
@@ -167,128 +211,7 @@
         </template>
 
         <template #main-aside>
-          <div
-            v-if="$x.totalResults > 0"
-            class="
-              x-list
-              x-list--padding-05
-              x-list--padding-top
-              x-list--gap-06
-              x-list--border
-              x-list--border-top
-            "
-          >
-            <FacetsProvider :facets="staticFacets" />
-            <ClearFilters />
-            <SelectedFiltersList>
-              <template #default="{ filter }">
-                <SimpleFilter :filter="filter" class="x-tag" />
-              </template>
-            </SelectedFiltersList>
-
-            <!-- Facets -->
-            <Facets class="x-list--gap-06" renderable-facets="!rootCategories_facet">
-              <!--  Hierarchical Facet    -->
-              <template #hierarchical-category="{ facet }">
-                <BaseHeaderTogglePanel class="x-facet">
-                  <template #header-content>
-                    <span class="x-ellipsis">{{ facet.label }}</span>
-                    <ChevronDown />
-                  </template>
-                  <!-- Filters -->
-                  <SlicedFilters max="4" :filters="facet.filters">
-                    <FiltersList v-slot="{ filter }">
-                      <HierarchicalFilter :filter="filter" :data-test="`${facet.label}-filter`" />
-                    </FiltersList>
-                  </SlicedFilters>
-                </BaseHeaderTogglePanel>
-              </template>
-
-              <!--  Brand Facet    -->
-              <template #brand-facet="{ facet }">
-                <BaseHeaderTogglePanel class="x-facet">
-                  <template #header-content>
-                    <span :data-test="facet.label" class="x-ellipsis">{{ facet.label }}</span>
-                    <span data-test="total-filters">{{ facet.filters.length }}</span>
-                    <ChevronDown />
-                  </template>
-
-                  <!-- Filters -->
-                  <ExcludeFiltersWithNoResults :filters="facet.filters">
-                    <SortedFilters>
-                      <FiltersSearch>
-                        <SlicedFilters
-                          :max="controls.slicedFilters.max"
-                          :data-test="`${facet.label}-sliced-filters`"
-                        >
-                          <FiltersList
-                            v-slot="{
-                              // eslint-disable-next-line vue/no-unused-vars
-                              filter
-                            }"
-                          >
-                            <SimpleFilter
-                              #label="{ filter }"
-                              :filter="filter"
-                              :data-test="`${facet.label}-filter`"
-                            >
-                              {{ filter.label }}
-                              <span data-test="brand-filter-total-results">
-                                {{ filter.totalResults }}
-                              </span>
-                            </SimpleFilter>
-                          </FiltersList>
-                        </SlicedFilters>
-                      </FiltersSearch>
-                    </SortedFilters>
-                  </ExcludeFiltersWithNoResults>
-                </BaseHeaderTogglePanel>
-              </template>
-
-              <!--  Default Facet    -->
-              <template #default="{ facet }">
-                <BaseHeaderTogglePanel class="x-facet">
-                  <template #header-content>
-                    <span :data-test="facet.label" class="x-ellipsis">{{ facet.label }}</span>
-                    <ChevronDown />
-                  </template>
-
-                  <!-- Filters -->
-                  <ExcludeFiltersWithNoResults :filters="facet.filters">
-                    <SortedFilters>
-                      <SlicedFilters
-                        :max="controls.slicedFilters.max"
-                        :data-test="`${facet.label}-sliced-filters`"
-                      >
-                        <SelectedFilters #default="{ selectedFilters }" :facetsIds="[facet.id]">
-                          <span :data-test="`${facet.label}-selected-filters`">
-                            {{ selectedFilters.length }}
-                          </span>
-                        </SelectedFilters>
-                        <FiltersList v-slot="{ filter }">
-                          <SimpleFilter
-                            #label
-                            :filter="filter"
-                            :data-test="`${facet.label}-filter`"
-                          >
-                            <BasePriceFilterLabel
-                              v-if="facet.id === 'price'"
-                              :filter="filter"
-                              class="x-filter__label"
-                              format="ii.dd €"
-                              lessThan="Less than {max}"
-                              fromTo="From {min} to {max}"
-                              from="More than {min}"
-                            />
-                          </SimpleFilter>
-                        </FiltersList>
-                      </SlicedFilters>
-                    </SortedFilters>
-                  </ExcludeFiltersWithNoResults>
-                </BaseHeaderTogglePanel>
-              </template>
-            </Facets>
-          </div>
+          <Aside v-if="$x.totalResults > 0" />
         </template>
 
         <template #main-body>
@@ -326,12 +249,23 @@
               <p>You may be interested in these:</p>
             </div>
 
+            <template v-if="!$x.query.searchBox">
+              <h1 class="x-title1 x-margin--bottom-06">Brand Recommendations</h1>
+              <LocationProvider location="no_results">
+                <SlidingQueryPreview query="sunglasses" />
+                <SlidingQueryPreview query="handbag" />
+                <SlidingQueryPreview query="earrings" />
+              </LocationProvider>
+            </template>
+
             <!-- Results -->
             <LocationProvider location="results">
               <ResultsList v-infinite-scroll:main-scroll>
                 <BannersList>
                   <PromotedsList>
-                    <NextQueriesList>
+                    <NextQueriesList
+                      :show-only-after-offset="controls.nextQueriesList.showOnlyAfterOffset"
+                    >
                       <BaseVariableColumnGrid :animation="resultsAnimation">
                         <template #result="{ item: result }">
                           <MainScrollItem :item="result">
@@ -348,31 +282,48 @@
                         </template>
 
                         <template #next-queries-group="{ item: { nextQueries } }">
-                          <div class="x-list x-padding--06 x-background--neutral-95 x-list--gap-06">
-                            <div class="x-list x-list--gap-03">
-                              <h1 class="x-title2 x-text--bold">You may be interested</h1>
-                              <p class="x-text x-font-size--05">
-                                This is what other shoppers searched after
-                                <span class="x-font-weight--bold">"{{ $x.query.search }}"</span>
-                              </p>
+                          <NextQueryPreview
+                            :suggestion="nextQueries[0]"
+                            :max-items-to-render="controls.nextQueriesPreview.maxItemsToRender"
+                            #default="{ results }"
+                            class="x-row__item x-row__item--span-9 x-padding--top-06"
+                          >
+                            <h1 class="x-title2 x-text--bold">Others clients have searched</h1>
+                            <NextQuery class="x-text x-font-size--05" :suggestion="nextQueries[0]">
+                              <span class="x-font-weight--bold">{{ nextQueries[0].query }}</span>
+                            </NextQuery>
+                            <div class="x-margin--bottom-06">
+                              <SlidingPanel :resetOnContentChange="false">
+                                <div class="x-list x-list--gap-03">
+                                  <Result
+                                    v-for="result in results"
+                                    :key="result.id"
+                                    :result="result"
+                                    style="max-width: 180px"
+                                    data-test="next-query-preview-result"
+                                  />
+                                </div>
+                              </SlidingPanel>
                             </div>
-                            <NextQueries
-                              #suggestion="{ suggestion }"
-                              :suggestions="nextQueries"
-                              class="x-list--gap-06"
-                              :max-items-to-render="3"
+                            <NextQuery
+                              :suggestion="nextQueries[0]"
+                              data-test="view-all-results"
+                              class="
+                                x-tag x-tag--pill
+                                x-font-weight--bold
+                                x-margin--left-auto x-margin--right-auto x-margin--top-03
+                                x-padding--top-04
+                                x-padding--bottom-04
+                                x-padding--right-05
+                                x-padding--left-05
+                                x-font-color--lead
+                                x-border-color--lead
+                                x-margin--bottom-06
+                              "
                             >
-                              <NextQuery
-                                #default="{ suggestion: nextQuery }"
-                                :suggestion="suggestion"
-                                class="x-tag x-tag--card"
-                              >
-                                <LightBulbOn class="x-icon--l" />
-                                <span class="x-flex-auto">{{ nextQuery.query }}</span>
-                                <ArrowRight class="x-icon--l" />
-                              </NextQuery>
-                            </NextQueries>
-                          </div>
+                              {{ 'View all results' }}
+                            </NextQuery>
+                          </NextQueryPreview>
                         </template>
                       </BaseVariableColumnGrid>
                     </NextQueriesList>
@@ -418,12 +369,11 @@
           </ScrollToTop>
         </template>
       </MultiColumnMaxWidthLayout>
-    </BaseEventsModal>
+    </MainModal>
   </div>
 </template>
 
 <script lang="ts">
-  import { Facet, SimpleFilter as SimpleFilterModel } from '@empathyco/x-types';
   import Vue from 'vue';
   import { Component } from 'vue-property-decorator';
   // eslint-disable-next-line max-len
@@ -435,10 +385,8 @@
   import BaseGrid from '../../components/base-grid.vue';
   import BaseVariableColumnGrid from '../../components/base-variable-column-grid.vue';
   import BaseColumnPickerList from '../../components/column-picker/base-column-picker-list.vue';
-  import BasePriceFilterLabel from '../../components/filters/labels/base-price-filter-label.vue';
   import ArrowRight from '../../components/icons/arrow-right.vue';
   import CheckTiny from '../../components/icons/check-tiny.vue';
-  import ChevronDown from '../../components/icons/chevron-down.vue';
   import ChevronLeft from '../../components/icons/chevron-left.vue';
   import ChevronRight from '../../components/icons/chevron-right.vue';
   import ChevronTinyDown from '../../components/icons/chevron-tiny-down.vue';
@@ -452,44 +400,23 @@
   import Nq1 from '../../components/icons/nq-1.vue';
   import SearchIcon from '../../components/icons/search.vue';
   import BaseEventButton from '../../components/base-event-button.vue';
-  import { BaseKeyboardNavigation } from '../../components/index';
   // eslint-disable-next-line max-len
   import MultiColumnMaxWidthLayout from '../../components/layouts/multi-column-max-width-layout.vue';
   import LocationProvider from '../../components/location-provider.vue';
-  import BaseEventsModalClose from '../../components/modals/base-events-modal-close.vue';
-  import BaseEventsModalOpen from '../../components/modals/base-events-modal-open.vue';
-  import BaseEventsModal from '../../components/modals/base-events-modal.vue';
-  import BaseHeaderTogglePanel from '../../components/panels/base-header-toggle-panel.vue';
   import BaseIdTogglePanelButton from '../../components/panels/base-id-toggle-panel-button.vue';
   import BaseIdTogglePanel from '../../components/panels/base-id-toggle-panel.vue';
   import PreselectedFilters from '../../x-modules/facets/components/preselected-filters.vue';
   import BaseResultImage from '../../components/result/base-result-image.vue';
   import SlidingPanel from '../../components/sliding-panel.vue';
   import SnippetCallbacks from '../../components/snippet-callbacks.vue';
-  import BaseSuggestions from '../../components/suggestions/base-suggestions.vue';
   import { infiniteScroll } from '../../directives/infinite-scroll/infinite-scroll';
-  import { XEvent, XEventsTypes } from '../../wiring/index';
   // eslint-disable-next-line max-len
   import RenderlessExtraParams from '../../x-modules/extra-params/components/renderless-extra-param.vue';
   // eslint-disable-next-line max-len
   import SnippetConfigExtraParams from '../../x-modules/extra-params/components/snippet-config-extra-params.vue';
-  import ClearFilters from '../../x-modules/facets/components/clear-filters.vue';
-  import FacetsProvider from '../../x-modules/facets/components/facets/facets-provider.vue';
-  import Facets from '../../x-modules/facets/components/facets/facets.vue';
-  // eslint-disable-next-line max-len
-  import HierarchicalFilter from '../../x-modules/facets/components/filters/hierarchical-filter.vue';
-  import SimpleFilter from '../../x-modules/facets/components/filters/simple-filter.vue';
-  // eslint-disable-next-line max-len
-  import ExcludeFiltersWithNoResults from '../../x-modules/facets/components/lists/exclude-filters-with-no-results.vue';
-  import FiltersList from '../../x-modules/facets/components/lists/filters-list.vue';
-  import FiltersSearch from '../../x-modules/facets/components/lists/filters-search.vue';
-  // eslint-disable-next-line max-len
-  import SelectedFiltersList from '../../x-modules/facets/components/lists/selected-filters-list.vue';
-  import SelectedFilters from '../../x-modules/facets/components/lists/selected-filters.vue';
-  import SlicedFilters from '../../x-modules/facets/components/lists/sliced-filters.vue';
-  import SortedFilters from '../../x-modules/facets/components/lists/sorted-filters.vue';
   import NextQueriesList from '../../x-modules/next-queries/components/next-queries-list.vue';
   import NextQueries from '../../x-modules/next-queries/components/next-queries.vue';
+  import NextQueryPreview from '../../x-modules/next-queries/components/next-query-preview.vue';
   import { NextQuery } from '../../x-modules/next-queries/index';
   import Recommendations from '../../x-modules/recommendations/components/recommendations.vue';
   import RelatedTags from '../../x-modules/related-tags/components/related-tags.vue';
@@ -498,6 +425,8 @@
   import ClearSearchInput from '../../x-modules/search-box/components/clear-search-input.vue';
   import SearchButton from '../../x-modules/search-box/components/search-button.vue';
   import SearchInput from '../../x-modules/search-box/components/search-input.vue';
+  // eslint-disable-next-line max-len
+  import SearchInputPlaceholder from '../../x-modules/search-box/components/search-input-placeholder.vue';
   import Banner from '../../x-modules/search/components/banner.vue';
   import BannersList from '../../x-modules/search/components/banners-list.vue';
   import PartialQueryButton from '../../x-modules/search/components/partial-query-button.vue';
@@ -512,64 +441,63 @@
   import Spellcheck from '../../x-modules/search/components/spellcheck.vue';
   import Tagging from '../../x-modules/tagging/components/tagging.vue';
   import UrlHandler from '../../x-modules/url/components/url-handler.vue';
+  import MainModal from '../../components/modals/main-modal.vue';
+  import OpenMainModal from '../../components/modals/open-main-modal.vue';
+  import CloseMainModal from '../../components/modals/close-main-modal.vue';
+  import BaseKeyboardNavigation from '../../components/base-keyboard-navigation.vue';
+  import { XProvide } from '../../components/decorators/injection.decorators';
+  import { adapterConfig } from '../adapter';
+  import Aside from './aside.vue';
   import PredictiveLayer from './predictive-layer.vue';
   import Result from './result.vue';
+  import { HomeControls } from './types';
+  import SlidingQueryPreview from './sliding-query-preview.vue';
 
   @Component({
     directives: {
       infiniteScroll
     },
     components: {
-      BaseEventButton,
-      PreselectedFilters,
       ArrowRight,
+      Aside,
       AutoProgressBar,
       Banner,
       BannersList,
       BaseColumnPickerList,
       BaseDropdown,
-      BaseEventsModal,
-      BaseEventsModalClose,
-      BaseEventsModalOpen,
+      BaseEventButton,
       BaseGrid,
-      BaseHeaderTogglePanel,
       BaseIdTogglePanel,
       BaseIdTogglePanelButton,
       BaseKeyboardNavigation,
-      BasePriceFilterLabel,
       BaseResultImage,
-      BaseSuggestions,
       BaseVariableColumnGrid,
       CheckTiny,
-      ChevronDown,
       ChevronLeft,
       ChevronRight,
       ChevronTinyDown,
       ChevronTinyLeft,
       ChevronTinyRight,
       ChevronUp,
-      ClearFilters,
       ClearSearchInput,
+      CloseMainModal,
       CrossIcon,
-      ExcludeFiltersWithNoResults,
-      Facets,
-      FacetsProvider,
-      FiltersList,
-      FiltersSearch,
       Grid1Col,
       Grid2Col,
-      HierarchicalFilter,
       LightBulbOn,
       LocationProvider,
       MainScrollItem,
       MultiColumnMaxWidthLayout,
       NextQueries,
       NextQueriesList,
+      NextQueryPreview,
       NextQuery,
       Nq1,
+      OpenMainModal,
       PartialQueryButton,
       PartialResultsList,
       PredictiveLayer,
+      PreselectedFilters,
       Promoted,
       PromotedsList,
       Recommendations,
@@ -582,32 +510,39 @@
       SearchButton,
       SearchIcon,
       SearchInput,
-      SelectedFilters,
-      SelectedFiltersList,
-      SimpleFilter,
-      SlicedFilters,
+      SearchInputPlaceholder,
       SlidingPanel,
+      SlidingQueryPreview,
       SnippetCallbacks,
       SnippetConfigExtraParams,
       SortDropdown,
       SortList,
-      SortedFilters,
       Spellcheck,
       SpellcheckButton,
       Tagging,
-      UrlHandler
+      UrlHandler,
+      MainModal
     }
   })
   export default class App extends Vue {
     protected stores = ['Spain', 'Portugal', 'Italy'];
     protected initialExtraParams = { store: 'Portugal' };
+    protected searchInputPlaceholderMessages = [
+      'Find shirts',
+      'Find shoes',
+      'Find watches',
+      'Find handbags',
+      'Find sunglasses'
+    ];
     protected columnPickerValues = [0, 4, 6];
     protected resultsAnimation = StaggeredFadeAndSlide;
     protected modalAnimation = animateClipPath();
     protected sortDropdownAnimation = CollapseHeight;
     protected selectedColumns = 4;
     protected sortValues = ['', 'price asc', 'price desc'];
-    protected controls = {
+
+    @XProvide('controls')
+    public controls: HomeControls = {
       searchInput: {
         instant: true,
         instantDebounceInMs: 500 // default
@@ -620,39 +555,21 @@
       },
       historyQueries: {
         maxItemsToRender: 5
+      },
+      nextQueriesPreview: {
+        maxItemsToRender: 10
+      },
+      nextQueriesList: {
+        showOnlyAfterOffset: true
+      },
+      adapter: {
+        useE2EAdapter: false
       }
     };
 
-    protected eventsToOpenX: Partial<XEventsTypes> = {
-      UserClickedOpenX: undefined,
-      UserClickedOpenEventsModal: undefined
-    };
-    protected eventsToCloseX: Partial<XEventsTypes> = {
-      UserClickedCloseX: undefined,
-      UserClickedCloseEventsModal: undefined
-    };
-
-    protected eventsToOpenModal: XEvent[] = [
-      'UserClickedOpenEventsModal',
-      'UserOpenXProgrammatically',
-      'UserClickedOpenX'
-    ];
-    protected staticFacets: Facet[] = [
-      {
-        modelName: 'SimpleFacet',
-        label: 'offer',
-        id: 'offer',
-        filters: [
-          {
-            facetId: 'offer',
-            modelName: 'SimpleFilter',
-            id: 'price:[0 TO 10]',
-            selected: false,
-            label: 'In Offer'
-          } as SimpleFilterModel
-        ]
-      }
-    ];
+    toggleE2EAdapter(): void {
+      adapterConfig.e2e = !adapterConfig.e2e;
+    }
   }
 </script>
 

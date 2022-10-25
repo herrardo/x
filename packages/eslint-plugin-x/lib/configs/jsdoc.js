@@ -10,7 +10,15 @@ module.exports = {
       'jsdoc/check-tag-names': [
         'error',
         {
-          definedTags: ['internal', 'remarks', 'typeParam', 'packageDocumentation']
+          definedTags: [
+            'internal',
+            'alpha',
+            'beta',
+            'remarks',
+            'privateRemarks',
+            'typeParam',
+            'packageDocumentation'
+          ]
         }
       ],
       'jsdoc/empty-tags': 'warn',

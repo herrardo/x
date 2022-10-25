@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.15](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.14...@empathyco/eslint-plugin-x@2.0.0-alpha.15) (2022-10-14)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0-alpha.14](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.13...@empathyco/eslint-plugin-x@2.0.0-alpha.14) (2022-09-27)
+
+### Features
+
+- add `vue devtools` plugin to ease `XEvents` and `wiring` visualization (#215)
+  ([bd148ec](https://github.com/empathyco/x/commit/bd148ecb9682f8d4161d278c03f110f8f050d323)),
+  closes [EX-7032](https://searchbroker.atlassian.net/browse/EX-7032)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0-alpha.13](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.12...@empathyco/eslint-plugin-x@2.0.0-alpha.13) (2022-09-20)
+
+### Features
+
+- Improve tailwindcss types. (#725)
+  ([14dec97](https://github.com/empathyco/x/commit/14dec974174cd18e63cb5f4e9a690a9989de44bc)),
+  closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0-alpha.12](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.11...@empathyco/eslint-plugin-x@2.0.0-alpha.12) (2022-09-09)
+
+### Features
+
+- disable `@typescript-eslint/no-extra-parens` rule (#715)
+  ([3718017](https://github.com/empathyco/x/commit/3718017c5528156f931bc8b1f2d208cdb50781ed)),
+  closes [EX-6996](https://searchbroker.atlassian.net/browse/EX-6996)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0-alpha.11](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.10...@empathyco/eslint-plugin-x@2.0.0-alpha.11) (2022-08-03)
+
+### ⚠ BREAKING CHANGES
+
+- **facets:** Removed the `setFilter`mutation from `facets` X-Module. Use `mutateFilter` instead.
+- **facets:** Modified the `HierarchicalFilter.children` Model type. Now it is an
+  `Array<HierarchicalFilter>` instead of an array of ids.
+
+### Features
+
+- **facets:** Move filters flattening from `x-adapter-platform` to `x-components`. (#626)
+  ([2bebaeb](https://github.com/empathyco/x/commit/2bebaeb2863fe794f1b3bea924904651b9302ef6)),
+  closes [EX-6484](https://searchbroker.atlassian.net/browse/EX-6484)
+
+### Build System
+
+- sync duplicated dependencies (#567)
+  ([912e968](https://github.com/empathyco/x/commit/912e9687851594871b3296a5fb26129327939d96)),
+  closes [EX-6412](https://searchbroker.atlassian.net/browse/EX-6412)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0-alpha.10](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.9...@empathyco/eslint-plugin-x@2.0.0-alpha.10) (2022-06-06)
+
+### Features
+
+- disable v-slot-style
+  ([2e8c2d9](https://github.com/empathyco/x/commit/2e8c2d93605b6a694e84c98f955ee7acfdfd35e3)),
+  closes [EX-6284](https://searchbroker.atlassian.net/browse/EX-6284)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [2.0.0-alpha.9](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.8...@empathyco/eslint-plugin-x@2.0.0-alpha.9) (2022-05-11)
 
 ### ⚠ BREAKING CHANGES

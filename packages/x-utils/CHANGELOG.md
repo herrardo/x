@@ -3,6 +3,110 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-alpha.10](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.9...@empathyco/x-utils@1.0.0-alpha.10) (2022-10-14)
+
+### Continuous Integration
+
+- update `runners` version (#740)
+  ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.9](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.8...@empathyco/x-utils@1.0.0-alpha.9) (2022-09-27)
+
+### Features
+
+- Add `rename` utility (#745)
+  ([7ba6383](https://github.com/empathyco/x/commit/7ba6383096ba99b2a7d1fc162de81651b4c4af0f)),
+  closes [EX-7103](https://searchbroker.atlassian.net/browse/EX-7103)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.8](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.7...@empathyco/x-utils@1.0.0-alpha.8) (2022-09-16)
+
+### Features
+
+- **x-adapter:** clean empty params (#716)
+  ([eeb4399](https://github.com/empathyco/x/commit/eeb4399c59b44691d31efbf49ad028dda1123229)),
+  closes [EX-6959](https://searchbroker.atlassian.net/browse/EX-6959)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.7](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.6...@empathyco/x-utils@1.0.0-alpha.7) (2022-09-13)
+
+### Features
+
+- add `uiLang` parameter (#714)
+  ([f4108d4](https://github.com/empathyco/x/commit/f4108d4a76582dac7b1f8cd240e91f226e7b1ad5)),
+  closes [EX-6855](https://searchbroker.atlassian.net/browse/EX-6855)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.6](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.5...@empathyco/x-utils@1.0.0-alpha.6) (2022-09-09)
+
+**Note:** Version bump only for package @empathyco/x-utils
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.5](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.4...@empathyco/x-utils@1.0.0-alpha.5) (2022-06-23)
+
+### Bug Fixes
+
+- Remove `@empathyco/x-platform-adapter` dependency from library code. (#575)
+  ([104c7e1](https://github.com/empathyco/x/commit/104c7e10855a67b2adfa68d42d82431f9194ee15)),
+  closes [EX-6437](https://searchbroker.atlassian.net/browse/EX-6437)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.4](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.3...@empathyco/x-utils@1.0.0-alpha.4) (2022-06-16)
+
+**Note:** Version bump only for package @empathyco/x-utils
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.3](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.2...@empathyco/x-utils@1.0.0-alpha.3) (2022-06-09)
+
+**Note:** Version bump only for package @empathyco/x-utils
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.0-alpha.2](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.1...@empathyco/x-utils@1.0.0-alpha.2) (2022-06-08)
+
+### Features
+
+- add support for `object` params in `httpClients`
+  ([c51760b](https://github.com/empathyco/x/commit/c51760b07b2dac2e83f13964aac614d8fe6e8e8b)),
+  closes [EX-6293](https://searchbroker.atlassian.net/browse/EX-6293)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.0.0-alpha.1](https://github.com/empathyco/x/compare/@empathyco/x-utils@1.0.0-alpha.0...@empathyco/x-utils@1.0.0-alpha.1) (2022-05-13)
 
 **Note:** Version bump only for package @empathyco/x-utils

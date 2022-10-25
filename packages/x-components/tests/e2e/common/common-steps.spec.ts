@@ -1,7 +1,6 @@
 import { Given, Then, When, And } from 'cypress-cucumber-preprocessor/steps';
 import { PageableRequest } from '@empathyco/x-types';
 import '../global/global-definitions';
-import 'reflect-metadata';
 import { baseSnippetConfig } from '../../../src/views/base-config';
 
 let resultsList: string[] = [];
@@ -65,7 +64,11 @@ Given('a URL with a filter parameter {string}', (filter: string) => {
 });
 
 When('start button is clicked', () => {
-  cy.getByDataTest('open-modal').click();
+  cy.getByDataTest('open-main-modal').click();
+});
+
+When('close modal button is clicked', () => {
+  cy.getByDataTest('close-main-modal').click();
 });
 
 // Filters
@@ -171,6 +174,10 @@ Then('related results are displayed', () => {
     });
 });
 
+And('related results are cleared', () => {
+  cy.getByDataTest('result-item').should('not.exist');
+});
+
 Then('related results have changed', () => {
   cy.getByDataTest('search-result')
     .should('be.visible')
@@ -180,6 +187,11 @@ Then('related results have changed', () => {
         .map(resultElement => resultElement.textContent);
       expect(compoundResultsList.every(item => resultsList.includes(item!))).to.eq(false);
     });
+});
+
+// Scroll
+When('scrolling down to result {string}', (resultId: string) => {
+  cy.get(`[data-scroll=${resultId}]`).scrollIntoView({ easing: 'swing', duration: 1000 });
 });
 
 // Search Box
@@ -220,6 +232,10 @@ Then(
   }
 );
 
+When('{string} is added to the search', (secondQuery: string) => {
+  cy.typeQuery(` ${secondQuery}`);
+});
+
 // Sort
 When('sort option {string} is selected from the sort dropdown', (sortOption: string) => {
   cy.getByDataTest(`sort-dropdown-toggle`).click();
@@ -237,8 +253,83 @@ Then(
   (key: string, value: string) => {
     cy.wait('@interceptedResults')
       .its('request.body')
-      .then(JSON.parse)
-      .should('have.property', key, value === 'default' ? '' : value);
+      .should((body: string) => {
+        expect(JSON.parse(body)).to.have.property(key, value);
+      });
+  }
+);
+
+Then('search request contains sort parameter with value {string}', (value: string) => {
+  cy.wait('@interceptedResults')
+    .its('request.body')
+    .should((body: string) => {
+      expect(JSON.parse(body)).to.have.property('sort', value === 'default' ? '' : value);
+    });
+});
+
+Then(
+  'search request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedResults')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
+  }
+);
+
+Then(
+  'recommendations request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedRecommendations')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
+  }
+);
+
+Then(
+  'popular searches request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedPopularSearches')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
+  }
+);
+
+Then(
+  'next queries request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedNextQueries')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
+  }
+);
+
+Then(
+  'related tags request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedRelatedTags')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
+  }
+);
+
+Then(
+  'query suggestions request contains extra parameter {string} with value {string}',
+  (key: string, value: string) => {
+    cy.wait('@interceptedQuerySuggestions')
+      .its('request.body')
+      .should((body: string) => {
+        expect(JSON.parse(body).extraParams).to.have.property(key, value);
+      });
   }
 );
 

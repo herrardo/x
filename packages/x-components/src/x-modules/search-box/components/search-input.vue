@@ -1,12 +1,16 @@
 <template>
   <input
     ref="input"
+    @mouseenter="emitUserHoveredInSearchBox"
+    @mouseleave="emitUserHoveredOutSearchBox"
     @blur="emitUserBlurredSearchBox"
     @click="emitUserClickedSearchBox"
     @focus="emitUserFocusedSearchBox"
     @input="emitUserIsTypingAQueryEvents"
     @keydown.enter="emitUserPressedEnterKey"
     @keydown.up.down.prevent="emitUserPressedArrowKey"
+    @beforeinput="preventSpecialKey"
+    v-on="$listeners"
     :maxlength="maxLength"
     :value="query"
     autocomplete="off"
@@ -15,7 +19,7 @@
     inputmode="search"
     type="search"
     data-test="search-input"
-    aria-label="type your query here"
+    :aria-label="searchInputMessage"
   />
 </template>
 
@@ -44,6 +48,8 @@
   })
   export default class SearchInput extends Vue {
     public $refs!: { input: HTMLInputElement };
+
+    protected searchInputMessage = 'type your query here';
 
     /**
      * Maximum characters allowed in the input search.
@@ -87,7 +93,7 @@
     /**
      * When event {@link XEventsTypes.UserReachedEmpathizeTop} or
      * {@link SearchBoxXEvents.UserPressedClearSearchBoxButton}
-     * are emitted the search in put is focused.
+     * are emitted the search input is focused.
      *
      * @internal
      */
@@ -146,6 +152,24 @@
         target: this.$refs.input,
         feature: 'search_box'
       };
+    }
+
+    /**
+     * Emits event {@link SearchBoxXEvents.UserHoveredInSearchBox} when search box is hovered in.
+     *
+     * @internal
+     */
+    protected emitUserHoveredInSearchBox(): void {
+      this.$x.emit('UserHoveredInSearchBox', undefined, { target: this.$refs.input });
+    }
+
+    /**
+     * Emits event {@link SearchBoxXEvents.UserHoveredOutSearchBox} when search box is hovered out.
+     *
+     * @internal
+     */
+    protected emitUserHoveredOutSearchBox(): void {
+      this.$x.emit('UserHoveredOutSearchBox', undefined, { target: this.$refs.input });
     }
 
     /**
@@ -232,6 +256,18 @@
     protected emitUserAcceptedAQuery(query: string): void {
       this.$x.emit('UserAcceptedAQuery', query, this.createEventMetadata());
     }
+
+    /**
+     * Prevents the user from either typing or pasting special characters in the input field.
+     *
+     * @internal
+     * @param event - The event that will be checked for special characters.
+     */
+    protected preventSpecialKey(event: InputEvent): void {
+      if (/[<>]/.test(event.data ?? '')) {
+        event.preventDefault();
+      }
+    }
   }
 </script>
 
@@ -317,6 +353,16 @@ In this example, a message has been added below the search input to illustrate t
 For example, if you select the search input box, the message “focus” appears. When you start to
 enter a search term, the message “typing” appears. If you press Enter after typing a search term,
 the message “enter” appears.
+
+<!-- prettier-ignore-start -->
+:::warning X Events are only emitted from the root X Component.
+At the moment, X Events are only emitted from the root X Component. This means that if you wrap
+the `SearchInput` with another component of another module like the `MainScroll`, you should add
+the listeners to the `MainScroll` instead of the `SearchInput`. If you need to subscribe to these
+events, it is recommended to use the [`GlobalXBus`](../common/x-components.global-x-bus.md)
+component instead.
+:::
+<!-- prettier-ignore-end -->
 
 _Type any term in the input field to try it out!_
 

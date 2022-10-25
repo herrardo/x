@@ -173,11 +173,13 @@
      * @internal
      */
     protected updateScrollPosition(): void {
-      const { scrollLeft, clientWidth, scrollWidth } = this.$refs.scrollContainer;
-      this.isScrollAtStart = !scrollLeft;
-      /* The 2 px extra is to fix some cases in some resolutions where the scroll + client size is
-       *  less than the scroll width even when the scroll is at the end */
-      this.isScrollAtEnd = scrollLeft + clientWidth + 2 >= scrollWidth;
+      if (this.$refs.scrollContainer !== undefined) {
+        const { scrollLeft, clientWidth, scrollWidth } = this.$refs.scrollContainer;
+        this.isScrollAtStart = !scrollLeft;
+        /* The 2 px extra is to fix some cases in some resolutions where the scroll + client size is
+         *  less than the scroll width even when the scroll is at the end */
+        this.isScrollAtEnd = scrollLeft + clientWidth + 2 >= scrollWidth;
+      }
     }
 
     /**
@@ -253,7 +255,8 @@
       display: flex;
       flex: 100%;
       flex-flow: row nowrap;
-      overflow: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
       scrollbar-width: none; // Firefox
       -ms-overflow-style: none; // IE
 

@@ -1,55 +1,68 @@
-import { DeepPartial, Dictionary } from '@empathyco/x-utils';
-import { TailwindPluginFn } from 'tailwindcss/plugin';
-import { ReturnOfComponents } from './helpers/components';
-import { ReturnOfDynamicComponents } from './helpers/dynamic-components';
-import { ReturnOfDynamicUtilities } from './helpers/dynamic-utilities';
-import { ReturnOfUtilities } from './helpers/utilities';
+import { DeepPartial, Dictionary, ExtractPath } from '@empathyco/x-utils';
+import { PluginAPI } from 'tailwindcss/types/config';
+import { Config } from 'tailwindcss';
+import { ReturnOfComponents } from './x-tailwind-plugin/components';
+import { ReturnOfDynamicComponents } from './x-tailwind-plugin/dynamic-components';
+import { ReturnOfDynamicUtilities } from './x-tailwind-plugin/dynamic-utilities';
+import { ReturnOfUtilities } from './x-tailwind-plugin/utilities';
+import Theme from './x-tailwind-plugin/theme';
 
 /**
  * Represents a `CSS` variable name.
  *
  * @example
  * ```typescript
- * const primaryColor: CSSVariable = '--color-primary';
+ * const leadColor: CssVariable = '--color-lead';
  * ```
  *
  * @internal
  */
-type CSSVariable = `--${string}`;
+type CssVariable = `--${string}`;
 
 /**
- * Represents a `CSS` class selector.
+ * Represents a `Css` class selector.
  *
  * @example
  * ```typescript
- * const btnClass: CSSClassSelector = '.btn';
+ * const btnClass: CssClassSelector = '.btn';
  * ```
  *
  * @internal
  */
-type CSSClassSelector = `.${string}`;
+type CssClassSelector = `.${string}`;
 /**
  * Represents a `CSS` nested selector.
  *
  * @example
  * ```typescript
- * const nestedSelector: CSSNestedSelector = '&--primary';
+ * const nestedSelector: CssNestedSelector = '&--lead';
  * ```
  *
  * @internal
  */
-type CSSNestedSelector = `&${string}`;
+type CssNestedSelector = `&${string}`;
+/**
+ * Represents a `CSS` pseudo selector.
+ *
+ * @example
+ * ```typescript
+ * const rootSelector: CssPseudoSelector = ':root';
+ * ```
+ *
+ * @internal
+ */
+type CssPseudoSelector = `:${string}`;
 
 /**
  * Represents the different `CSS` styling options for a component.
  *
  * @example
  * ```typescript
- * const cssOptions: CSSStyleOptions = {
- *   '--color-primary': 'blue',
+ * const cssOptions: CssStyleOptions = {
+ *   '--color-lead': 'blue',
  *   '.btn': {
- *     '&--primary': {
- *       color: 'var(--color-primary)',
+ *     '&--lead': {
+ *       color: 'var(--color-lead)',
  *       gap: theme('spacing.2')
  *     }
  *   }
@@ -58,9 +71,11 @@ type CSSNestedSelector = `&${string}`;
  *
  * @public
  */
-export type CSSStyleOptions = {
-  [Key: CSSClassSelector | CSSNestedSelector]: CSSStyleOptions | Partial<CSSStyleDeclaration>;
-  [Key: CSSVariable]: string & Partial<TailwindHelpers>;
+export type CssStyleOptions = {
+  [Key: CssClassSelector | CssNestedSelector | CssPseudoSelector]:
+    | CssStyleOptions
+    | Partial<CSSStyleDeclaration>;
+  [Key: CssVariable]: string & Partial<TailwindHelpers>;
 };
 
 /**
@@ -68,9 +83,9 @@ export type CSSStyleOptions = {
  *
  * @public
  */
-export type DynamicCSSStylesOptions = Dictionary<{
-  styles: (value: unknown) => CSSStyleOptions;
-  values?: string;
+export type DynamicCssStylesOptions = Dictionary<{
+  styles: (value: unknown) => CssStyleOptions;
+  values?: Dictionary<unknown>;
 }>;
 
 /**
@@ -78,21 +93,26 @@ export type DynamicCSSStylesOptions = Dictionary<{
  *
  * @public
  */
-export type TailwindHelpers = Parameters<TailwindPluginFn>[0];
+export type TailwindHelpers = PluginAPI & {
+  theme: <TDefaultValue = Config['theme']>(
+    path?: ExtractPath<typeof Theme>,
+    defaultValue?: TDefaultValue
+  ) => TDefaultValue;
+};
 
 /**
  * Represents the return type of {@link PluginOptions.components}.
  *
  * @public
  */
-export type ComponentsDefinition = DeepPartial<ReturnOfComponents> | CSSStyleOptions;
+export type ComponentsDefinition = DeepPartial<ReturnOfComponents> | CssStyleOptions;
 
 /**
  * Represents the return type of {@link PluginOptions.utilities}.
  *
  * @public
  */
-export type UtilitiesDefinition = DeepPartial<ReturnOfUtilities> | CSSStyleOptions;
+export type UtilitiesDefinition = DeepPartial<ReturnOfUtilities> | CssStyleOptions;
 
 /**
  * Represents the return type of {@link PluginOptions.dynamicComponents}.
@@ -101,7 +121,7 @@ export type UtilitiesDefinition = DeepPartial<ReturnOfUtilities> | CSSStyleOptio
  */
 export type DynamicComponentsDefinition =
   | DeepPartial<ReturnOfDynamicComponents>
-  | DynamicCSSStylesOptions;
+  | DynamicCssStylesOptions;
 
 /**
  * Represents the return type of {@link PluginOptions.dynamicUtilities}.
@@ -110,7 +130,7 @@ export type DynamicComponentsDefinition =
  */
 export type DynamicUtilitiesDefinition =
   | DeepPartial<ReturnOfDynamicUtilities>
-  | DynamicCSSStylesOptions;
+  | DynamicCssStylesOptions;
 
 /**
  * Options to create a plugin.
@@ -121,25 +141,25 @@ export interface PluginOptions {
   /**
    * Registers new static components or modify the existing ones.
    */
-  components?: (helpers: Partial<TailwindHelpers>) => ComponentsDefinition;
+  components?: (helpers: TailwindHelpers) => ComponentsDefinition;
   /**
    * Registers a new dynamic component styles or replaces the existing ones.
    */
-  dynamicComponents?: (helpers: Partial<TailwindHelpers>) => DynamicComponentsDefinition;
+  dynamicComponents?: (helpers: TailwindHelpers) => DynamicComponentsDefinition;
   /**
    * Registers new static utilities or modify the existing ones.
    */
-  utilities?: (helpers: Partial<TailwindHelpers>) => UtilitiesDefinition;
+  utilities?: (helpers: TailwindHelpers) => UtilitiesDefinition;
   /**
    * Registers a new dynamic utilities styles or replaces the existing ones.
-   * */
-  dynamicUtilities?: (helpers: Partial<TailwindHelpers>) => DynamicUtilitiesDefinition;
+   */
+  dynamicUtilities?: (helpers: TailwindHelpers) => DynamicUtilitiesDefinition;
   /**
    * Helper to add extra functionalities.
    */
-  extra?: (helpers: Partial<TailwindHelpers>) => Partial<TailwindHelpers>;
+  extra?: (helpers: TailwindHelpers) => Partial<TailwindHelpers>;
   /**
    * Helper to define new theme or modify the existing one.
    */
-  theme?: Dictionary;
+  theme?: DeepPartial<typeof Theme> | Config['theme'];
 }

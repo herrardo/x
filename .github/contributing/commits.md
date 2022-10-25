@@ -52,11 +52,13 @@ As a starting point, this project uses the following scopes:
 - X Modules: If the change only affects one X Module, use the name of the module in `kebab-case`:
   - **device**
   - **empathize**
+  - **extra-params**
   - **facets**
   - **history-queries**
   - **identifier-results**
   - **next-queries**
   - **popular-searches**
+  - **queries-preview**
   - **query-suggestions**
   - **recommendations**
   - **related-tags**
@@ -64,6 +66,7 @@ As a starting point, this project uses the following scopes:
   - **search**
   - **search-box**
   - **tagging**
+  - **url**
 - **x-plugin**: For changes that affect the core of the `x-components` project. For example, if you
   modify the X Components plugin, the X Components archetype, or the X bus.
 - **wiring**: Changes that only affect the wiring operators or wiring factory.
@@ -107,16 +110,16 @@ The footer can contain two parts: a [breaking changes](#breaking-changes) sectio
 
 #### Breaking changes
 
-This footer must be prefixed with `BREAKING-CHANGE:`. After that, you can write a brief description
+This footer must be prefixed with `BREAKING CHANGE:`. After that, you can write a brief description
 of what the breaking change is, and what the users should do to their codebases to support the
 change.
 
 ```
-BREAKING-CHANGE: Rename `BaseEventsButton` to `EventsButton`.
+BREAKING CHANGE: Rename `BaseEventsButton` to `EventsButton`.
 ```
 
 ```
-BREAKING-CHANGE: Rename `BaseFilter` component to `Filter`, and move it from `components` to the `facets` module. Now it can be imported like this: `import { Filter } from '@empathyco/x-components/facets'`.
+BREAKING CHANGE: Rename `BaseFilter` component to `Filter`, and move it from `components` to the `facets` module. Now it can be imported like this: `import { Filter } from '@empathyco/x-components/facets'`.
 ```
 
 #### Issue
@@ -151,7 +154,7 @@ Commit with breaking changes
 ```
 feat(facets): backend filters no longer keep their own `selected` status.
 
-BREAKING-CHANGE: backend filters now trust the API selected value. The adapter must not map valid `filter.selected` values.
+BREAKING CHANGE: backend filters now trust the API selected value. The adapter must not map valid `filter.selected` values.
 
 EX-1111
 ```

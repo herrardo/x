@@ -1,24 +1,39 @@
 <template>
-  <component :is="animation" @beforeEnter="showOverlay = false" @afterEnter="showOverlay = true">
-    <div v-if="open" class="x-modal" data-test="modal">
-      <div ref="modal" class="x-modal__content x-list" data-test="modal-content" role="dialog">
+  <div v-show="isWaitingForLeave || open" class="x-modal" data-test="modal">
+    <component
+      :is="animation"
+      @before-leave="isWaitingForLeave = true"
+      @after-leave="isWaitingForLeave = false"
+    >
+      <div
+        v-if="open"
+        ref="modal"
+        class="x-modal__content x-list"
+        data-test="modal-content"
+        role="dialog"
+      >
         <!-- @slot (Required) Modal container content -->
         <slot />
       </div>
+    </component>
+    <component :is="overlayAnimation">
       <div
+        v-if="open"
         @click="emitOverlayClicked"
+        @keydown="emitOverlayClicked"
         class="x-modal__overlay"
-        :class="{ 'x-modal__overlay--is-visible': showOverlay }"
         data-test="modal-overlay"
       />
-    </div>
-  </component>
+    </component>
+  </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import { Component, Prop } from 'vue-property-decorator';
+  import Fade from '../animations/fade.vue';
   import { NoElement } from '../no-element';
+  import { FOCUSABLE_SELECTORS } from '../../utils/focus';
 
   /**
    * Base component with no XPlugin dependencies that serves as a utility for constructing more
@@ -29,10 +44,17 @@
   @Component
   export default class BaseModal extends Vue {
     /**
-     * Animation to use for opening/closing the modal.
+     * Animation to use for opening/closing the modal. This animation only affects the content.
      */
     @Prop({ default: () => NoElement })
     public animation!: Vue | string;
+
+    /**
+     * Animation to use for the overlay (backdrop) part of the modal. By default, it uses
+     * a fade transition.
+     */
+    @Prop({ default: () => Fade })
+    public overlayAnimation!: Vue | string;
 
     /**
      * Determines if the modal is open or not.
@@ -40,12 +62,19 @@
     @Prop({ required: true })
     public open!: boolean;
 
+    /**
+     * Determines if the focused element changes to one inside the modal when it opens. Either the
+     * first element with a positive tabindex or just the first focusable element.
+     */
+    @Prop({ default: true })
+    public focusOnOpen!: boolean;
+
     /** The previous value of the body overflow style. */
     protected previousBodyOverflow = '';
     /** The previous value of the HTML element overflow style. */
     protected previousHTMLOverflow = '';
-    /** To animate the overlay opacity after and before the animation. */
-    protected showOverlay = true;
+    /** Boolean to delay the leave animation until it has completed. */
+    protected isWaitingForLeave = false;
 
     public $refs!: {
       modal: HTMLDivElement;
@@ -54,7 +83,10 @@
     protected mounted(): void {
       /* Watcher added after mount to prevent SSR from breaking */
       // eslint-disable-next-line @typescript-eslint/unbound-method
-      this.$watch('open', this.syncBody, { immediate: true });
+      this.$watch('open', this.syncBody);
+      if (this.open) {
+        this.syncBody(true);
+      }
     }
 
     /**
@@ -71,6 +103,9 @@
         this.$on('hook:beforeDestroy', this.removeBodyListeners);
         this.$on('hook:beforeDestroy', this.enableScroll);
         /* eslint-enable @typescript-eslint/unbound-method */
+        if (this.focusOnOpen) {
+          this.setFocus();
+        }
       } else {
         this.enableScroll();
         this.removeBodyListeners();
@@ -100,7 +135,6 @@
     protected enableScroll(): void {
       document.body.style.overflow = this.previousBodyOverflow;
       document.documentElement.style.overflow = this.previousHTMLOverflow;
-      document.body.style.overflow = document.documentElement.style.overflow = '';
     }
 
     /**
@@ -146,6 +180,23 @@
         this.$emit('focusin:body', event);
       }
     }
+
+    /**
+     * Sets the focused element to the first element either the first element with a positive
+     * tabindex or, if there isn't any, the first focusable element inside the modal.
+     *
+     * @internal
+     */
+    protected setFocus(): void {
+      const focusCandidates: HTMLElement[] = Array.from(
+        this.$refs.modal.querySelectorAll(FOCUSABLE_SELECTORS)
+      );
+
+      const elementToFocus =
+        focusCandidates.find(element => element.tabIndex) ?? focusCandidates[0];
+
+      elementToFocus?.focus();
+    }
   }
 </script>
 
@@ -154,13 +205,11 @@
     position: fixed;
     top: 0;
     left: 0;
-
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     height: 100%;
-
     z-index: 1;
 
     &__content {
@@ -170,14 +219,9 @@
     &__overlay {
       width: 100%;
       height: 100%;
-      position: fixed;
-      background-color: rgba(0, 0, 0, 0.7);
-      opacity: 0;
-
-      &--is-visible {
-        transition: opacity 0.3s ease-out;
-        opacity: 1;
-      }
+      position: absolute;
+      background-color: var(--x-modal-overlay-color, rgb(0, 0, 0));
+      opacity: var(--x-modal-overlay-opacity, 0.7);
     }
   }
 </style>
