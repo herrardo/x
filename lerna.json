@@ -3,6 +3,7 @@
   "version": "independent",
   "ignoreChanges": ["**/package-lock.json"],
   "changelogPreset": {
+    "header": "",
     "name": "conventionalcommits",
     "issuePrefixes": ["EX-"],
     "issueUrlFormat": "https://searchbroker.atlassian.net/browse/EX-{{id}}",
