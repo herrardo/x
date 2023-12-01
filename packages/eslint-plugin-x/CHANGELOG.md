@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.0-alpha.2...@empathyco/eslint-plugin-x@3.0.0) (2023-12-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** minimum node version required is 18.
+* **deps:** minimum version required is node v18
+
+EMP-274
+* **facets:** Removed the `setFilter`mutation from `facets` X-Module. Use `mutateFilter` instead.
+* **facets:** Modified the `HierarchicalFilter.children` Model type. Now it is an `Array<HierarchicalFilter>` instead of an array of ids.
+* Request types moved to `x-types` package. Change the imports from `x-adapter` to `x-type`.
+* Removed `TaggingInfo` type. Use `TaggingRequest` from `@empathyco/x-types` instead.
+* **eslint:** Vue config now also extends the recommended config from vuejs-accesibility plugin.
+* standard-version dependency has been removed from eslint-plugin-x package
+
+### Features
+
+* add `prettier-plugin-tailwindcss` (#1033) ([c3eae8b](https://github.com/empathyco/x/commit/c3eae8bef0a75fa1e78f1190947a74fa9269d6bd)), closes [EX-7884](https://searchbroker.atlassian.net/browse/EX-7884)
+* add `vue devtools` plugin to ease `XEvents` and `wiring` visualization (#215) ([bd148ec](https://github.com/empathyco/x/commit/bd148ecb9682f8d4161d278c03f110f8f050d323)), closes [EX-7032](https://searchbroker.atlassian.net/browse/EX-7032)
+* disable `@typescript-eslint/no-extra-parens` rule (#715) ([3718017](https://github.com/empathyco/x/commit/3718017c5528156f931bc8b1f2d208cdb50781ed)), closes [EX-6996](https://searchbroker.atlassian.net/browse/EX-6996)
+* disable v-slot-style ([2e8c2d9](https://github.com/empathyco/x/commit/2e8c2d93605b6a694e84c98f955ee7acfdfd35e3)), closes [EX-6284](https://searchbroker.atlassian.net/browse/EX-6284)
+* enable `allowWhitespace` in `jsdoc/no-multi-asterisks` (#1029) ([65b0d17](https://github.com/empathyco/x/commit/65b0d1734e1453a56fba67f0e6cb772f9d695452))
+* **eslint:** add `vuejs-accessibility` plugin (#427) ([6789771](https://github.com/empathyco/x/commit/6789771ab88a909552da74095694a4c2a191a51d)), closes [EX-5845](https://searchbroker.atlassian.net/browse/EX-5845)
+* extract SessionService to x-utils package ([5268808](https://github.com/empathyco/x/commit/52688087e577dfd7ce9b0669b21ada75ae67053c))
+* **facets:** Move filters flattening from `x-adapter-platform` to `x-components`. (#626) ([2bebaeb](https://github.com/empathyco/x/commit/2bebaeb2863fe794f1b3bea924904651b9302ef6)), closes [EX-6484](https://searchbroker.atlassian.net/browse/EX-6484)
+* Improve tailwindcss types. (#725) ([14dec97](https://github.com/empathyco/x/commit/14dec974174cd18e63cb5f4e9a690a9989de44bc)), closes [EX-6790](https://searchbroker.atlassian.net/browse/EX-6790)
+* Minor improvements. (#1109) ([1c9dace](https://github.com/empathyco/x/commit/1c9dacea7c46eb0b27687730a8a4978d0e49b230)), closes [EX-8130](https://searchbroker.atlassian.net/browse/EX-8130)
+* move `Request` types to `x-types` package ([7cc85c1](https://github.com/empathyco/x/commit/7cc85c1d371b604b3188d8cc2076eab5fc9460e4)), closes [EX-6066](https://searchbroker.atlassian.net/browse/EX-6066)
+* **typeguards:** add isPath ([3c23ed0](https://github.com/empathyco/x/commit/3c23ed0c094161d787d24b2327d0884e41531878)), closes [EX-5802](https://searchbroker.atlassian.net/browse/EX-5802)
+* update typescript ([73edca6](https://github.com/empathyco/x/commit/73edca61c1cea39d82a7ab94bc18c8bff94c138c)), closes [EX-5367](https://searchbroker.atlassian.net/browse/EX-5367)
+* **url:** set `origin` when navigating ([02aa766](https://github.com/empathyco/x/commit/02aa7661a15c3718f4809d094a01b0f684a1f55d)), closes [EX-3541](https://searchbroker.atlassian.net/browse/EX-3541)
+
+
+### Bug Fixes
+
+* **build:** Fix issue with prettier-plugin-tailwindcss. (#1102) ([b87f274](https://github.com/empathyco/x/commit/b87f2741815e9a6723a997a955a1b18784cb4ed4)), closes [EX-8112](https://searchbroker.atlassian.net/browse/EX-8112)
+* **deps:** remove  `only-allow` pnpm (#1097) ([b2a63d3](https://github.com/empathyco/x/commit/b2a63d308f20804d55a266189ab5d6242f88f6d8)), closes [EX-8082](https://searchbroker.atlassian.net/browse/EX-8082)
+* **deps:** update dependency @vue/eslint-config-typescript to v11 (#1218) ([dcbaecd](https://github.com/empathyco/x/commit/dcbaecd8bdb585774a5c2a444b9a84d19384ed7b))
+
+
+### Styling
+
+* update prettier and format code (#1026) ([a18cc17](https://github.com/empathyco/x/commit/a18cc172b6638962d53192905cd466f12bccacac)), closes [EX-7877](https://searchbroker.atlassian.net/browse/EX-7877)
+
+
+### Continuous Integration
+
+* migrate from `npm` & `lerna bootstrap` to `pnpm` (#1047) ([aaaba4f](https://github.com/empathyco/x/commit/aaaba4f8a5498c16e17ea6daf9c18a1f49918f70)), closes [EX-7891](https://searchbroker.atlassian.net/browse/EX-7891)
+* update `runners` version (#740) ([38f246c](https://github.com/empathyco/x/commit/38f246c306dac40c4afbcdea08336052981ca9b8))
+
+
+### Others
+
+* **deps:** update node to 18 (#1196) ([e0e6b35](https://github.com/empathyco/x/commit/e0e6b35eefb3ef83f22e341f662475b0e6066e94))
+* **deps:** update node to v18 (#1175) ([14e64e1](https://github.com/empathyco/x/commit/14e64e11fdf7f3d27d59baf56b027857df9e61e7))
+* remove standard-version from eslint-plugin-x ([256c9d0](https://github.com/empathyco/x/commit/256c9d051ca1d36cf465fa4ca9a00dfc1d986ae7)), closes [EX-5526](https://searchbroker.atlassian.net/browse/EX-5526)
+
+
+### Build System
+
+* Add `eslint` and `prettier` to `devDependencies` in eslint-plugin-x (#987) ([1013b73](https://github.com/empathyco/x/commit/1013b73436537ea14085456b334a6ec3b54b3767))
+* **dependencies:** update `typescript` to `4.9.4` and its dependencies to their latest version (#993) ([500ab57](https://github.com/empathyco/x/commit/500ab57e4729f5c4dcefaa31ed4a8497ddd349b9)), closes [EX-7288](https://searchbroker.atlassian.net/browse/EX-7288)
+* **deps:** bump `@typescript-eslint/parser` (#909) ([9b8d2c4](https://github.com/empathyco/x/commit/9b8d2c4dda760e3d0a14d7098d0d1a521682afe4))
+* **deps:** bump `eslint`, `@typescript-eslint/eslint-plugin` and `eslint-import-resolver-typescript` ([cd63a4b](https://github.com/empathyco/x/commit/cd63a4b8fd7e7c605af86181e55e1e9379d59e95))
+* **deps:** update dependencies ([491f9c5](https://github.com/empathyco/x/commit/491f9c5a27cf5eaa4dc3f31c97ea514bb8f3515b))
+* **deps:** update dependencies (#1024) ([e99425f](https://github.com/empathyco/x/commit/e99425fc315526afe40b1fd536bcfde1fc1af08a))
+* **deps:** update dependencies (#908) ([840da52](https://github.com/empathyco/x/commit/840da52dec32e04cf2b402cca2646b49c839e6e8))
+* **deps:** update deps (#1046) ([b6957df](https://github.com/empathyco/x/commit/b6957df9d88c0d94c2543047991a63afadd707ff))
+* **deps:** update eslint-plugin dependencies (#447) ([51d60f0](https://github.com/empathyco/x/commit/51d60f0e11fa9667a784bbdb10ba1f39159b382f)), closes [EX-5383](https://searchbroker.atlassian.net/browse/EX-5383)
+* **deps:** Upgrade Cypress and Vue Cli plugins versions. (#399) ([630d6b0](https://github.com/empathyco/x/commit/630d6b0d767a3484140ecd252e2be10817e0900d)), closes [EX-5417](https://searchbroker.atlassian.net/browse/EX-5417)
+* Fix colors.js dependency issue ([2ffcc22](https://github.com/empathyco/x/commit/2ffcc222f5666d7866c8d7cd3a0eec7c0bb1f938)), closes [EX-5293](https://searchbroker.atlassian.net/browse/EX-5293)
+* pin `prettier-plugin-tailwindcss` to 0.3.0 version (#1331) ([9d70cf4](https://github.com/empathyco/x/commit/9d70cf4ea23619d065be538f571f9fca1d53e10a))
+* sync duplicated dependencies (#567) ([912e968](https://github.com/empathyco/x/commit/912e9687851594871b3296a5fb26129327939d96)), closes [EX-6412](https://searchbroker.atlassian.net/browse/EX-6412)
+* update jest dependencies ([f3fee15](https://github.com/empathyco/x/commit/f3fee157d724292f5cbb7166908d48ef2fb4fe8c)), closes [EX-5027](https://searchbroker.atlassian.net/browse/EX-5027)
+
+
+
 ## [2.0.2](https://github.com/empathyco/x/compare/@empathyco/eslint-plugin-x@2.0.2-alpha.0...@empathyco/eslint-plugin-x@2.0.2) (2023-11-24)
 
 **Note:** Version bump only for package @empathyco/eslint-plugin-x
